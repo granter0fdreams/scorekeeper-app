@@ -1,4 +1,4 @@
-package org.launchcode.scorekeeperapp.Models;
+package org.launchcode.scorekeeperapp.models;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;

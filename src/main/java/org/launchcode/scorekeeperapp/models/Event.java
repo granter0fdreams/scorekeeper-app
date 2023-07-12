@@ -1,4 +1,4 @@
-package org.launchcode.scorekeeperapp.Models;
+package org.launchcode.scorekeeperapp.models;
 
 public class Event extends AbstractEntity{
 
