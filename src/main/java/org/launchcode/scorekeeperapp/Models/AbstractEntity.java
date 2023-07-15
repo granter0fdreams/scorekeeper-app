@@ -14,6 +14,8 @@ public abstract class AbstractEntity {
     //The object id will be the primary way to differentiate players/admins/tournaments
     //in the database.
 
+    private String name;
+
     public int getId() {
         return id;
     }
@@ -29,5 +31,13 @@ public abstract class AbstractEntity {
     @Override
     public int hashCode() {
         return Objects.hash(id);
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }

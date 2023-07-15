@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org/">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Create an event</title>
+</head>
+<body>
+<form method="post" style="max-width:600px;">
+    <div class="form-group">
+
+        <input class="form-control" th:field="${event.name}" />
+
+
+        <input th:field="${event.streetAddress}" type="street"
+               class="form-control"
+               id="autocomplete"
+               placeholder="Street">
+
+
+        <input th:field="${event.city}" type="city"
+               class="form-control"
+               id="inputCity"
+               placeholder="City">
+
+
+        <input th:field="${event.state}" type="state"
+               class="form-control"
+               id="inputState"
+               placeholder="State">
+
+        <input th:field="${event.ZIPCode}" type="zip"
+               class="form-control"
+               id="inputZIP"
+               placeholder="ZIP">
+    </div>
+    <input type="submit" value="Create My Event!" />
+</form>
+
+</body>
+</html>
+
+<!--<form action="save" th:method="post" th:action="@{save}" th:object="${customer}">-->
+<!--    <input type ="text" th:field="*{firstName}" placeholder="First Name" /><br />-->
+<!--    <input type ="text" th:field="*{lastName}" placeholder="Last Name" /><br />-->
+<!--    <input type="email" th:field="*{emailAddress}"  placeholder="Email" /><br />-->
+<!--    <input type="password" th:field="*{password}"  placeholder="Password" /><br />-->
+<!--    <input style="text-align: center" type="submit" value="Register" /> </form>-->
