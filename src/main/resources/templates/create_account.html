@@ -6,5 +6,34 @@
     <title>Create Account</title>
 </head>
 <body>
+<form method = 'post' th:action="@{/create-account}">
+    <label>
+        Username:
+        <input type = 'text' th:field="${user.username}">
+        <p th:errors="${user.username}"></p>
+    </label>
+
+    <label>
+        Email:
+        <input th:field="${user.email}">
+        <p th:errors="${user.email}"></p>
+    </label>
+
+    <label>
+        Password:
+        <input type = 'password' th:field="${user.password}">
+        <p th:errors="${user.password}"></p>
+    </label>
+
+    <label>
+        Verify Password:
+        <input type = 'password' th:field="${user.verify}">
+        <p th:errors="${user.verify}"></p>
+    </label>
+
+    <p th:text="${error}"></p>
+
+    <input type = 'submit' value = 'Create Account'>
+</form>
 </body>
 </html>
