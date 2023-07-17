@@ -20,7 +20,7 @@ public class UserController {
     }
     @PostMapping("create-account")
     public String createAccount(@ModelAttribute("user") User user) {
-        if (userRepository.existsById(user.getUsername()) || userRepository.existsById(user.getEmail())) {
+        if (userRepository.existsByUsername(user.getUsername()) || userRepository.existsByEmail(user.getEmail())) {
             return "login";
         }
         userRepository.save(user);
