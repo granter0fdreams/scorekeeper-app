@@ -11,16 +11,14 @@ import org.springframework.web.bind.annotation.*;
 public class UserController {
     @Autowired
     private UserRepository userRepository;
-    public UserController(UserRepository userRepository){
-        this.userRepository = userRepository;
-    }
 
-    @GetMapping("/create-account")
+
+    @GetMapping("create-account")
     public String displayCreateAccountForm (Model model){
-        model.addAttribute(new User());
+        model.addAttribute("user",new User());
         return "create_account";
     }
-    @PostMapping("/create-account")
+    @PostMapping("create-account")
     public String createAccount(@ModelAttribute("user") User user) {
         if (userRepository.existsById(user.getUsername()) || userRepository.existsById(user.getEmail())) {
             return "login";
@@ -30,4 +28,3 @@ public class UserController {
     }
 }
 
-}
