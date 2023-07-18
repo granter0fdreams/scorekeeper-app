@@ -9,22 +9,22 @@ import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class UserController {
-    @Autowired
-    private UserRepository userRepository;
-
-
-    @GetMapping("create-account")
-    public String displayCreateAccountForm (Model model){
-        model.addAttribute("user",new User());
-        return "create_account";
-    }
-    @PostMapping("create-account")
-    public String createAccount(@ModelAttribute("user") User user) {
-        if (userRepository.existsByUsername(user.getUsername()) || userRepository.existsByEmail(user.getEmail())) {
-            return "login";
-        }
-        userRepository.save(user);
-        return "redirect:/create_tournament";
-    }
+//    @Autowired
+//    private UserRepository userRepository;
+//
+//
+//    @GetMapping("create-account")
+//    public String displayCreateAccountForm (Model model){
+//        model.addAttribute("user",new User());
+//        return "create_account";
+//    }
+//    @PostMapping("create-account")
+//    public String createAccount(@ModelAttribute("user") User user) {
+//        if (userRepository.existsByUsername(user.getUsername()) || userRepository.existsByEmail(user.getEmail())) {
+//            return "login";
+//        }
+//        userRepository.save(user);
+//        return "redirect:/create_tournament";
+//    }
 }
 

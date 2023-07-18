@@ -1,4 +1,12 @@
 package org.launchcode.scorekeeperapp.models;
 
-public class Scores {
+import javax.persistence.Entity;
+
+@Entity
+public class Scores extends AbstractEntity{
+
+        public Scores (){
+
+        }
+
 }
