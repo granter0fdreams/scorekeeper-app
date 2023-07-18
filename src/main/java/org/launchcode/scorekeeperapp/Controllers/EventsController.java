@@ -25,17 +25,17 @@ public class EventsController {
 
     @GetMapping("create")
     public String displayCreateEventForm(Model model) {
-        model.addAttribute("title", "Current Events");
+        //model.addAttribute("title", "Current Events");
         model.addAttribute(new Event());
         return "events/create";
     }
     @PostMapping("create")
-    public String processCreateEventForm(@ModelAttribute Event newEvent,
+    public String processCreateEventForm(@ModelAttribute @Valid Event newEvent,
                                          Errors errors, Model model) {
 
         if (errors.hasErrors()) {
             model.addAttribute("title", "Create Event");
-            return "events/error";
+            return "events/create";
         }
         testRepo.save(newEvent);
         return "events/index";  //change this to send the user to the newly created event page.

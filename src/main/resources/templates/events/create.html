@@ -6,33 +6,34 @@
 </head>
 <body>
 <form method="post" style="max-width:600px;">
-    <div class="form-group">
 
-        <input class="form-control" th:field="${event.name}" />
+        <input th:field="${event.name}"
+               class="form-control"
+               id = "inputName"
+               placeholder = 'Pick a name'>
 
 
         <input th:field="${event.streetAddress}" type="street"
                class="form-control"
-               id="autocomplete"
+               id="inputStreet"
                placeholder="Street">
 
 
-        <input th:field="${event.city}" type="city"
-               class="form-control"
-               id="inputCity"
-               placeholder="City">
+<!--        <input th:field="${event.city}" type="city"-->
+<!--               class="form-control"-->
+<!--               id="inputCity"-->
+<!--               placeholder="City">-->
 
 
-        <input th:field="${event.state}" type="state"
-               class="form-control"
-               id="inputState"
-               placeholder="State">
+<!--        <input th:field="${event.state}" type="state"-->
+<!--               class="form-control"-->
+<!--               id="inputState"-->
+<!--               placeholder="State">-->
 
-        <input th:field="${event.ZIPCode}" type="zip"
-               class="form-control"
-               id="inputZIP"
-               placeholder="ZIP">
-    </div>
+<!--        <input th:field="${event.ZIPCode}" type="zip"-->
+<!--               class="form-control"-->
+<!--               id="inputZIP"-->
+<!--               placeholder="ZIP">-->
     <input type="submit" value="Create My Event!" />
 </form>
 
