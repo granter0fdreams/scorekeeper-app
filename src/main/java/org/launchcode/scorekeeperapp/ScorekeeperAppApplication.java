@@ -10,4 +10,5 @@ public class ScorekeeperAppApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(ScorekeeperAppApplication.class, args);
 	}
+
 }
