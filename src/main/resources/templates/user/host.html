@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th = "http://www.thymeleaf.org/">
+<head>
+    <meta charset="UTF-8">
+    <link href="../static/css/styles.css" th:href="@{/css/styles.css}" rel="stylesheet" />
+    <title>Host a Tournament</title>
+</head>
+<body>
+<h1>Host a Tournament</h1>
+<form method = 'post' th:action="@{/user/host}">
+    <label>
+        Username:
+        <input type = 'text' th:field="${user.username}"/>
+        <p th:errors="${user.username}"></p>
+    </label>
+
+    <label>
+        Email:
+        <input th:field="${user.email}"/>
+        <p th:errors="${user.email}"></p>
+    </label>
+
+    <label>
+        Password:
+        <input type = 'password' th:field="${user.password}"/>
+        <p th:errors="${user.password}"></p>
+    </label>
+
+<!--    <label>-->
+<!--        Verify Password:-->
+<!--        <input type = 'password' th:field="${user.verify}"/>-->
+<!--        <p th:errors="${user.verify}"></p>-->
+<!--    </label>-->
+
+<!--    <p th:text="${error}"></p>-->
+
+    <input type = 'submit' value = 'Create Account'/>
+</form>
+<a href="/login">Already Have an Account</a>
+</body>
+</html>
