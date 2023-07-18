@@ -1,39 +1,40 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="https://www.thymeleaf.org/">
+<html lang="en" xmlns:th="https://www.thymeleaf.org/" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8"/>
     <title>Create an event</title>
 </head>
 <body>
-<form method="post" th:object="${event}">>
+<form method="post" style="max-width:600px;">
 
         <input th:field="${event.name}"
                class="form-control"
                id = "inputName"
-               placeholder = 'Pick a name'>
+               placeholder = 'Pick a name'/>
 
 
-        <input th:field="${event.streetAddress}" type="street"
+        <input th:field="${event.streetAddress}"
                class="form-control"
                id="inputStreet"
-               placeholder="Street">
+               placeholder="Street"/>
 
 
-<!--        <input th:field="${event.city}" type="city"-->
-<!--               class="form-control"-->
-<!--               id="inputCity"-->
-<!--               placeholder="City">-->
+        <input th:field="${event.city}"
+               class="form-control"
+               id="inputCity"
+               placeholder="City"/>
 
 
-<!--        <input th:field="${event.state}" type="state"-->
-<!--               class="form-control"-->
-<!--               id="inputState"-->
-<!--               placeholder="State">-->
+        <input th:field="${event.state}"
+               class="form-control"
+               id="inputState"
+               placeholder="State"/>
 
-<!--        <input th:field="${event.ZIPCode}" type="zip"-->
-<!--               class="form-control"-->
-<!--               id="inputZIP"-->
-<!--               placeholder="ZIP">-->
+        <input th:field="${event.ZIPCode}"
+               class="form-control"
+               id="inputZIP"
+               placeholder="ZIP"/>
+
     <input type="submit" value="Create My Event!" />
 </form>
 
