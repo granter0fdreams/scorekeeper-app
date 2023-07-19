@@ -11,7 +11,7 @@ import java.util.Objects;
 public abstract class AbstractEntity {
 //An abstract class to use when making players, administrators and potentially even tournaments.
     @Id
-    @GeneratedValue
+    @GeneratedValue()
     private int id;
     //The object id will be the primary way to differentiate players/admins/tournaments
     //in the database.

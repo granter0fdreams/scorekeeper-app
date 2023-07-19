@@ -1,8 +1,8 @@
 package org.launchcode.scorekeeperapp.controllers;
 
 
-import org.launchcode.scorekeeperapp.models.data.EventRepository;
 import org.launchcode.scorekeeperapp.models.Event;
+import org.launchcode.scorekeeperapp.models.data.EventRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,7 +19,7 @@ public class EventController {
     private EventRepository eventRepository;
 
     @GetMapping("")
-    public String index(Model model){
+    public String index(Model model) {
         return "events/index";
     }
 
@@ -29,6 +29,7 @@ public class EventController {
         model.addAttribute(new Event());
         return "events/create";
     }
+
     @PostMapping("create")
     public String processCreateEventForm(@ModelAttribute @Valid Event newEvent,
                                          Errors errors, Model model) {
@@ -40,5 +41,4 @@ public class EventController {
         eventRepository.save(newEvent);
         return "events/index";  //change this to send the user to the newly created event page.
     }
-
 }

@@ -6,18 +6,22 @@
 </head>
 <body>
 <form method="post" style="max-width:600px;">
-
+<div>
     <input th:field="${event.name}"
            class="form-control"
            id = "inputName"
            placeholder = 'Pick an event name'/>
+    <span th:errors="${event.name}" class="error"></span>
+</div>
 
-
-    <input th:field="${event.holes}"
-           type="number"
-           class="form-control"
-           id="inputStreet"
-           placeholder="Number of holes"/>
+<!--<div>-->
+<!--    <input th:field="${event.holes}"-->
+<!--           type="number"-->
+<!--           class="form-control"-->
+<!--           id="chooseHoles"-->
+<!--           placeholder="Number of holes"/>-->
+<!--    <span th:errors="${event.holes}" class="error"></span>-->
+<!--</div>-->
 
 
     <input type="submit" value="Create My Event!" />
