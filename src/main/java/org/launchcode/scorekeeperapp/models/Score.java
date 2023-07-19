@@ -1,7 +1,9 @@
 package org.launchcode.scorekeeperapp.models;
 
+import javax.persistence.Entity;
 import java.util.HashMap;
 
+@Entity
 public class Score extends AbstractEntity{
     private Integer userID;
     private Integer eventID;

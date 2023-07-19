@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org/" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Create an event</title>
+</head>
+<body>
+<form method="post" style="max-width:600px;">
+
+    <input th:field="${event.name}"
+           class="form-control"
+           id = "inputName"
+           placeholder = 'Pick an event name'/>
+
+
+    <input th:field="${event.holes}"
+           type="number"
+           class="form-control"
+           id="inputStreet"
+           placeholder="Number of holes"/>
+
+
+    <input type="submit" value="Create My Event!" />
+</form>
+
+</body>
+</html>

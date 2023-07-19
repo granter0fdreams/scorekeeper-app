@@ -42,6 +42,7 @@ public abstract class AbstractEntity {
         return holesScores;
     }
 
+
     @Override
     public boolean equals(Object obj) {
         if (this == obj) return true;
