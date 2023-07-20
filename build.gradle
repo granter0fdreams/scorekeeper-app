@@ -13,6 +13,7 @@ java {
 
 repositories {
 	mavenCentral()
+	maven { url "https://jitpack.io" }
 }
 
 dependencies {
@@ -23,6 +24,7 @@ dependencies {
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	implementation 'mysql:mysql-connector-java:8.0.23'
+	implementation 'com.github.kenglxn.QRGen:javase:3.0.1'
 }
 
 tasks.named('test') {
