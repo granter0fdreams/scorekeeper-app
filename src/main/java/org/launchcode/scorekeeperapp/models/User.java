@@ -25,12 +25,8 @@ public class User extends AbstractEntity{
     @Size(min = 6, message = "Password must be at least 6 characters long")
     private String password;
 
-//    @ManyToMany(mappedBy = "events")
-//    private final List<Event> events = new ArrayList<>();
-
-    private Integer userEventID;
-    @ElementCollection
-    private Map<Integer, Integer> score = new HashMap<>();
+    @ManyToMany(mappedBy = "user")
+    private final List<Event> events = new ArrayList<>();
 
     public String getUsername() {
         return username;
@@ -54,10 +50,6 @@ public class User extends AbstractEntity{
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public void updateScore(Integer hole, Integer score){
-        this.score.put(hole, score);
     }
 
     public User() {

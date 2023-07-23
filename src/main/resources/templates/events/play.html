@@ -1,10 +1,31 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="https://www.thymeleaf.org/">
+<html lang="en" xmlns:th="https://www.thymeleaf.org/" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8"/>
-    <title>Title</title>
+    <title th:text = "${event.id}"></title>
 </head>
 <body>
+<form method = 'post' th:action="@{/events/play}">
+    <div>
+        <input th:field="${event.name}"
+               class="form-control"
+               id = "inputName"
+               placeholder = 'Pick an event name'/>
+        <p th:errors="${event.name}" class="error"></p>
+    </div>
+
+    <div>
+        <input th:field="${event.holes}"
+               type="number"
+               class="form-control"
+               id="chooseHoles"
+               placeholder="Number of holes"/>
+        <span th:errors="${event.holes}" class="error"></span>
+    </div>
+
+
+    <input type="submit" value="Create My Event!" />
+</form>
 
 </body>
 </html>

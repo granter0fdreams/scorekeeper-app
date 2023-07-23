@@ -19,10 +19,9 @@ public class Event extends AbstractEntity{
     @Digits(integer = 5, fraction = 0, message = "Please enter an integer larger than 0.")
     private Integer holes;
 
-    //An array of players, no need for a hashmap with (name, id) because the user object will provide a unique ID.
-//    @ManyToMany(mappedBy = "user")
-//    //@ElementCollection
-//    private List<User> players = new ArrayList<>();
+
+    @ManyToMany
+    private final List<User> user = new ArrayList<>();
 
     public String getName() {
         return name;
@@ -43,7 +42,6 @@ public class Event extends AbstractEntity{
     public Event(String name, Integer holes, List<User> players) {
         this.name = name;
         this.holes = holes;
-        //this.players = players;
     }
     public Event(){}
 }
