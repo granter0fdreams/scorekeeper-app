@@ -1,11 +1,31 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th = "http://www.thymeleaf.org/">
+<html lang="en" xmlns:th="https://www.thymeleaf.org/" xmlns="http://www.w3.org/1999/html">
 <head>
-    <meta charset="UTF-8">
-    <link href="../static/css/styles.css" th:href="@{/css/styles.css}" rel="stylesheet" />
-    <title>Create Tournament</title>
+    <meta charset="UTF-8"/>
+    <title>Create an event</title>
 </head>
 <body>
-Put code here to create event.
+<form method = 'post' th:action="@{/events/create}">
+    <div>
+        <input th:field="${event.name}"
+               class="form-control"
+               id = "inputName"
+               placeholder = 'Pick an event name'/>
+        <p th:errors="${event.name}" class="error"></p>
+    </div>
+
+    <div>
+        <input th:field="${event.holes}"
+               type="number"
+               class="form-control"
+               id="chooseHoles"
+               placeholder="Number of holes"/>
+        <span th:errors="${event.holes}" class="error"></span>
+    </div>
+
+
+    <input type="submit" value="Create My Event!" />
+</form>
+
 </body>
 </html>
