@@ -32,6 +32,8 @@ public class User extends AbstractEntity{
         return username;
     }
 
+    private boolean isLoggedIn = false;
+
     public void setUsername(String username) {
         this.username = username;
     }
@@ -50,6 +52,14 @@ public class User extends AbstractEntity{
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public boolean isLoggedIn() {
+        return isLoggedIn;
+    }
+
+    public void setLoggedIn(boolean loggedIn) {
+        isLoggedIn = loggedIn;
     }
 
     public User() {

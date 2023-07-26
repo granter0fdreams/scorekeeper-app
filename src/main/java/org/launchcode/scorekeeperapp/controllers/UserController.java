@@ -7,7 +7,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
-
 import javax.validation.Valid;
 
 @Controller
@@ -23,16 +22,47 @@ public class UserController {
     }
     @PostMapping("host")
     public String createAccount(@Valid @ModelAttribute("user") User user, Errors errors, Model model) {
-        if (userRepository.existsByUsername(user.getUsername()) || userRepository.existsByEmail(user.getEmail())) {
+        return "user/host";
+    }
+
+    @GetMapping("login")
+    public String displayLoginForm(Model model){
+        model.addAttribute("user",new User());
+        return "user/login";
+    }
+    @PostMapping("login")
+    public String processLoginForm(@ModelAttribute("user") User user, Errors errors, Model model){
+        if (userRepository.existsById(user.getId()) && user.getPassword() == userRepository.findById(user.getId()).get().getPassword()){
+            return "events/join";
+        }
+        if (errors.hasErrors()){
+            model.addAttribute("user", "Login");
+            model.addAttribute(new User());
             return "user/login";
         }
-        if (errors.hasErrors()) {
-            model.addAttribute("user", "Create Account");
-            model.addAttribute(new User());
-            return "user/host";
-        }
-        userRepository.save(user);
-        return "events/create";
+        return "events/join";
     }
+
+    @GetMapping("register")
+    public String displayRegisterForm(Model model){
+        model.addAttribute("user",new User());
+        return "user/register";
+    }
+
+    @PostMapping("register")
+    public String processRegisterForm(@ModelAttribute("user") User user, Errors errors, Model model){
+        if (errors.hasErrors()) {
+            model.addAttribute("user", "Login");
+            model.addAttribute(new User());
+            return "user/login";
+        }
+        if (userRepository.existsById(user.getId()) && user.getPassword() == userRepository.findById(user.getId()).get().getPassword()) {
+            user.setLoggedIn(true);
+            model.addAttribute("user", user);
+        }
+            return "events/join";
+
+    }
+
 }
 
