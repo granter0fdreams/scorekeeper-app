@@ -17,7 +17,7 @@ public abstract class AbstractEntity {
     private static int id;
     //The object id will be the primary way to differentiate players/admins/tournaments
     //in the database.
-    @ManyToOne
+   /* @ManyToOne
     private String tournamentName;
 
     public String getTournamentName() {
@@ -26,7 +26,7 @@ public abstract class AbstractEntity {
 
     public void setTournamentName(String name) {
         this.tournamentName = tournamentName;
-    }
+    }*/
     public static int getId() {
         return id;
     }
