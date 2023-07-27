@@ -25,8 +25,8 @@ public class User extends AbstractEntity{
     @Size(min = 6, message = "Password must be at least 6 characters long")
     private String password;
 
-    @ManyToMany(mappedBy = "user")
-    private final List<Event> events = new ArrayList<>();
+    //@ManyToMany(mappedBy = "user")
+    //private final List<Event> events = new ArrayList<>();
 
     public String getUsername() {
         return username;

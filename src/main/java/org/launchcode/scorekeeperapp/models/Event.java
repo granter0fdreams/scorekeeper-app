@@ -20,8 +20,8 @@ public class Event extends AbstractEntity{
     private Integer holes;
 
 
-    @ManyToMany
-    private final List<User> user = new ArrayList<>();
+    //@ManyToMany
+    //private final List<User> user = new ArrayList<>();
 
     public String getName() {
         return name;
