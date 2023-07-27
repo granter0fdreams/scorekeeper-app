@@ -2,6 +2,7 @@ package org.launchcode.scorekeeperapp.models;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.MappedSuperclass;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
@@ -16,7 +17,16 @@ public abstract class AbstractEntity {
     private static int id;
     //The object id will be the primary way to differentiate players/admins/tournaments
     //in the database.
+    @ManyToOne
+    private String tournamentName;
 
+    public String getTournamentName() {
+        return tournamentName;
+    }
+
+    public void setTournamentName(String name) {
+        this.tournamentName = tournamentName;
+    }
     public static int getId() {
         return id;
     }
