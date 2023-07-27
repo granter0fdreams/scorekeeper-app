@@ -6,4 +6,6 @@ import javax.persistence.ManyToOne;
 @Entity
 public class Event extends AbstractEntity{
 
+    public Event() {
+    }
 }
