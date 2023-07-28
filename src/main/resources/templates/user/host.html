@@ -2,40 +2,38 @@
 <html lang="en" xmlns:th = "http://www.thymeleaf.org/">
 <head>
     <meta charset="UTF-8">
-    <link href="../static/css/styles.css" th:href="@{/css/styles.css}" rel="stylesheet" />
+    <link href="../static/css/styles.css" th:href="@{/css/styles.css}" rel="stylesheet"/>
     <title>Host a Tournament</title>
 </head>
 <body>
 <h1>Host a Tournament</h1>
-<form method = 'post' th:action="@{/user/host}">
-    <label>
-        Username:
-        <input type = 'text' th:field="${user.username}"/>
-        <p th:errors="${user.username}"></p>
-    </label>
+<form method="post">
+    <div class="form-group">
+        <label>Username
+            <input class="form-control" th:field="${registerFormDTO.username}"/>
+        </label>
+        <p class="error" th:errors="${registerFormDTO.username}"></p>
+    </div>
+    <div class="form-group">
+        <label>Email
+            <input class="form-control" th:field="${registerFormDTO.email}" type="email"/>
+        </label>
+        <p class="error" th:errors="${registerFormDTO.email}"></p>
+    </div>
+    <div class="form-group">
+        <label>Password
+            <input class="form-control" th:field="${registerFormDTO.password}" type="password"/>
+        </label>
+        <p class="error" th:errors="${registerFormDTO.password}"></p>
+    </div>
+    <div class="form-group">
+        <label>Verify Password
+            <input class="form-control" th:field="${registerFormDTO.verifyPassword}" type="password"/>
+        </label>
+    </div>
 
-    <label>
-        Email:
-        <input th:field="${user.email}"/>
-        <p th:errors="${user.email}"></p>
-    </label>
-
-    <label>
-        Password:
-        <input type = 'password' th:field="${user.password}"/>
-        <p th:errors="${user.password}"></p>
-    </label>
-
-<!--    <label>-->
-<!--        Verify Password:-->
-<!--        <input type = 'password' th:field="${user.verify}"/>-->
-<!--        <p th:errors="${user.verify}"></p>-->
-<!--    </label>-->
-
-<!--    <p th:text="${error}"></p>-->
-
-    <input type = 'submit' value = 'Create Account'/>
+    <input type="submit" class="btn btn-primary" value="Create Account" />
 </form>
-<a href="/login">Already Have an Account</a>
+<a href="login">Already Have an Account</a>
 </body>
 </html>
