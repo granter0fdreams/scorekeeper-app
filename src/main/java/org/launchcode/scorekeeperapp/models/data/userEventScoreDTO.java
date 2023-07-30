@@ -5,40 +5,29 @@ import org.launchcode.scorekeeperapp.models.Scores;
 import org.launchcode.scorekeeperapp.models.User;
 
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
+import java.util.List;
 
 public class userEventScoreDTO {
-    @NotNull
-    private Event event;
 
-    @NotNull
-    private Scores score;
+    private List<Scores> scores = new ArrayList<>();
 
-    @NotNull
-    private User user;
+    public userEventScoreDTO(List<Scores> scores) {
+        this.scores = scores;
+    }
+    public userEventScoreDTO(){}
 
-    public userEventScoreDTO() {}
 
-    public Event getEvent() {
-        return event;
+    public void addScore(Scores score){
+        this.scores.add(score);
     }
 
-    public void setEvent(Event event) {
-        this.event = event;
+    public List<Scores> getScores() {
+        return scores;
     }
 
-    public Scores getScore() {
-        return score;
+    public void setScores(List<Scores> scores) {
+        this.scores = scores;
     }
 
-    public void setScore(Scores score) {
-        this.score = score;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
 }

@@ -22,7 +22,16 @@ public class UserController {
     }
     @PostMapping("host")
     public String createAccount(@Valid @ModelAttribute("user") User user, Errors errors, Model model) {
-        return "user/host";
+//        if (userRepository.existsByUsername(user.getUsername()) || userRepository.existsByEmail(user.getEmail())) {
+//            return "user/login";
+//        }
+        if (errors.hasErrors()) {
+            model.addAttribute("user", "Create Account");
+            model.addAttribute(new User());
+            return "events/create";
+        }
+        userRepository.save(user);
+        return "index";
     }
 
     @GetMapping("login")
@@ -40,7 +49,7 @@ public class UserController {
             model.addAttribute(new User());
             return "user/login";
         }
-        return "events/join";
+        return "/index";
     }
 
     @GetMapping("register")
