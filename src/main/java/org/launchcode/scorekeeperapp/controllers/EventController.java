@@ -66,7 +66,7 @@ public class EventController {
         scoreRepository.saveAll(dto.getScores());
 
         model.addAttribute("scores", scoreRepository.findAll());
-        return "redirect:/books/all";
+        return "events/index"; //Temp redirect to index.
     }
 
 
