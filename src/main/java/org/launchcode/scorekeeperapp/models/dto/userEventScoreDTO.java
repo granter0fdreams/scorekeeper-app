@@ -1,4 +1,4 @@
-package org.launchcode.scorekeeperapp.models.data;
+package org.launchcode.scorekeeperapp.models.dto;
 
 import org.launchcode.scorekeeperapp.models.Event;
 import org.launchcode.scorekeeperapp.models.Scores;
