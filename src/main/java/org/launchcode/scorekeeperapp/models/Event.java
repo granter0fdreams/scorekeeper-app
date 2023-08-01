@@ -1,13 +1,8 @@
 package org.launchcode.scorekeeperapp.models;
 
-import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
-import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
-import javax.persistence.criteria.CriteriaBuilder;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.Positive;
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity

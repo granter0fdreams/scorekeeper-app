@@ -8,6 +8,7 @@
 <form method = 'post' th:action="@{/events/create}">
     <div>
         <input th:field="${event.name}"
+               type="text"
                class="form-control"
                id = "inputName"
                placeholder = 'Pick an event name'/>
@@ -22,7 +23,6 @@
                placeholder="Number of holes"/>
         <span th:errors="${event.holes}" class="error"></span>
     </div>
-
 
     <input type="submit" value="Create My Event!" />
 </form>
