@@ -78,7 +78,7 @@ public class UserController {
         userRepository.save(newUser);
         setUserInSession(request.getSession(), newUser);
 
-        return "events/create";
+        return "redirect:/events/create";
     }
 
     @GetMapping("login")
@@ -116,7 +116,7 @@ public class UserController {
 
         setUserInSession(request.getSession(), theUser);
 
-        return "events/create";
+        return "redirect:/events/create";
     }
 
     @GetMapping("logout")

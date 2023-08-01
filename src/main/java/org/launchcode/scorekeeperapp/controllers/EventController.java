@@ -6,7 +6,7 @@ import org.launchcode.scorekeeperapp.models.User;
 import org.launchcode.scorekeeperapp.models.data.EventRepository;
 import org.launchcode.scorekeeperapp.models.data.ScoreRepository;
 import org.launchcode.scorekeeperapp.models.data.UserRepository;
-import org.launchcode.scorekeeperapp.models.data.userEventScoreDTO;
+import org.launchcode.scorekeeperapp.models.dto.userEventScoreDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
