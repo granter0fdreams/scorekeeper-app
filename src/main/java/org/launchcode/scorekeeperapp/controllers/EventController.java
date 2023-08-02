@@ -41,7 +41,7 @@ public class EventController {
         return "events/create";
     }
 
-    @GetMapping("index")
+    @GetMapping("/index")
     public String displayAllEvents(Model model){
         model.addAttribute("title","All Events");
         model.addAttribute("events",eventRepository.findAll());
@@ -68,6 +68,19 @@ public class EventController {
         model.addAttribute("scores", scoreRepository.findAll());
         return "events/index"; //Temp redirect to index.
     }
+
+    @GetMapping("scoreboard")
+    public String displaySingleEventScores(Model model){
+        model.addAttribute("title","Event Scores");
+        return "events/scoreboard";
+    }
+
+//    @GetMapping("scoreboard")
+//    public String displaySingleEventScores(@RequestParam Integer eventId, Model model){
+//        model.addAttribute("title","Event Scores");
+//        model.addAttribute("scores",scoreRepository.findById(eventId));
+//        return "events/scoreboard";
+//    }
 
 
 }
