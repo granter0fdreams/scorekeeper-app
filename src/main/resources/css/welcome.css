@@ -1,0 +1,45 @@
+<style>
+    body{
+
+    background-image: url(".images/golf_ball_and_tee.jpg");
+    background-repeat: no-repeat;
+    }
+
+    .welcome-container{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: space-around;
+    border-radius: 10px;
+    margin: 20px;
+    }
+
+
+
+    div .join{
+
+    flex-wrap: wrap;
+    flex-basis: 1;
+    border-radius: 10px;
+    font-size: 20px;
+    background-color: green;
+    padding: 20px;
+    height: 140px;
+    width: 150px;
+    margin: 20px;
+    }
+
+    div .host{
+    flex-flow: column wrap;
+    flex-basis: 1;
+    border-radius: 10px;
+    font-size: 20px;
+    background-color: green;
+    padding: 20px;
+    height: 140px;
+    width: 150px;
+    margin: 20px;
+    }
+
+
+  </style>

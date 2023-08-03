@@ -3,12 +3,70 @@
 <head>
   <meta charset="UTF-8">
   <link href="../static/css/styles.css" th:href="@{/css/styles.css}" rel="stylesheet" />
+  <link rel="stylesheet" href="./css/welcome.css"/>
   <title>Welcome to ScoreKeeper</title>
+
+  <style>
+    body{
+
+    background-image: url("..//images/golf_ball_and_tee.jpg");
+    background-repeat: no-repeat;
+    }
+
+    .welcome-container{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: space-around;
+    border-radius: 10px;
+    margin: 20px;
+    }
+
+
+
+    div .join{
+    align-content: center;
+    flex-wrap: wrap;
+    flex-basis: 1;
+    border-radius: 10px;
+    font-size: 20px;
+    background-color: green;
+    padding: 20px;
+    height: 75px;
+    width: 150px;
+    margin: 20px;
+    }
+
+    div .host{
+
+    flex-flow: column wrap;
+    flex-basis: 1;
+    border-radius: 10px;
+    font-size: 20px;
+    justify-content: center;
+    background-color: yellow;
+    padding: 20px;
+    height: 75px;
+    width: 150px;
+    margin: 20px;
+    }
+
+
+  </style>
 </head>
-<body>
+<body >
+<div class="welcome-container">
+  <div>
   <h1> Welcome to ScoreKeeper</h1>
+  </div>
+  <div class="join">
     <a href="user/join">Join a Tournament</a>
+  </div>
+  <div class="host">
     <a href="user/host">Host a Tournament</a>
+  </div>
+
+</div>
 </body>
 </html>
 <!-- created an index page that will allow client to see both options -->
