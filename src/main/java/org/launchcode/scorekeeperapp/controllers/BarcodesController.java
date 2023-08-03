@@ -12,15 +12,15 @@ import java.io.IOException;
 import java.util.Base64;
 
 @Controller
-@RequestMapping("barcodes")
+@RequestMapping("qrcode")
 public class BarcodesController {
     //private static final String QR_CODE_IMAGE_PATH = "./src/main/resources/static/img/QRCode.png";
 
     @GetMapping("")
     public String getQRCode(Model model)
     {
-        String medium="https://rahul26021999.medium.com/";
-        String github="https://github.com/rahul26021999";
+        String medium="https://localhost:8080/qrcode";
+        //String github="https://github.com/rahul26021999";
 
         byte[] image = new byte[0];
         try {
