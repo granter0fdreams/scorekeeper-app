@@ -16,12 +16,12 @@
     </tr>
     </thead>
     <tr th:each="score : ${scores}">
+        <td th:text="${score.position}"></td>
         <td th:text="${score.score}"></td>
         <td th:text="${score.userId}"></td>
     </tr>
 </table>
-There's supposed to be scores here, but I was kinda lazy and haven't implemented it yet.
-<!--TODO FIX SCORE DISPLAY HERE-->
+<!--TODO - Fix score display, see EventController displayViewEventPage-->
 
 
 
