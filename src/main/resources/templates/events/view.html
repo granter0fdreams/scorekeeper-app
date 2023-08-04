@@ -1,14 +1,17 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
-<head th:replace="fragments :: head"></head>
+<head th:replace="fragments :: head">Event Page</head>
 <body class="container">
 
 <h1 th:text="${'Event: ' + event.name}">Default Title</h1>
-<h1>Join Code</h1>
-<div style="width:40%;display: inline-block">
-    <p>Data : <span th:text="${eventLink}"></span></p>
-    <img th:src="${'data:image/png;base64,' + qrcode}" alt="" height="250" width="250">
+<h3>Join Code</h3>
+<div>
+<!--    <p>Data : <span th:text="${eventLink}"></span></p>-->
+    <img th:src="${'data:image/png;base64,' + qrcode}" alt="" height="150" width="150">
 </div>
+
+<h3 rel="events/play">Submit a Score</h3>
+
 <table class="table table-striped">
     <thead>
     <tr>

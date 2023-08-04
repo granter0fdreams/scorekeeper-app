@@ -70,12 +70,12 @@ public class EventController {
 
         Optional optEvent = eventRepository.findById(eventId);
         //Optional optScore = scoreRepository.findById(eventId);
-        Iterable optScore = scoreRepository.findAll();
+        Iterable<Scores> optScore = scoreRepository.findAll();
         if (optEvent.isPresent()) {
             Event event = (Event) optEvent.get();
             model.addAttribute("event", event);
             //if (optScore.isPresent()) {
-                //Scores scores = (Scores) optScore.get();
+                //Scores scores = (Scores) optScore.get(); //needs a way to filter by only event ID, find by checks for the main ID...
                 model.addAttribute("scores", optScore);
             //}
             //TODO - Fix the score display here
@@ -83,6 +83,7 @@ public class EventController {
             return "events/view";
         } else {
             return "redirect:../";
+            //if the event doesn't exist this redirects you to the main index, prevents 404'ing.
         }
     }
 
