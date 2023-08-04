@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+<body class="container">
+
+<h1 th:text="${'Event: ' + event.name}">Default Title</h1>
+<h1>Join Code</h1>
+<div style="width:40%;display: inline-block">
+    <p>Data : <span th:text="${eventLink}"></span></p>
+    <img th:src="${'data:image/png;base64,' + qrcode}" alt="" height="250" width="250">
+</div>
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th>All Scores</th>
+    </tr>
+    </thead>
+    <tr th:each="score : ${scores}">
+        <td th:text="${score.score}"></td>
+        <td th:text="${score.userId}"></td>
+    </tr>
+</table>
+There's supposed to be scores here, but I was kinda lazy and haven't implemented it yet.
+<!--TODO FIX SCORE DISPLAY HERE-->
+
+
+
+</body>
+</html>

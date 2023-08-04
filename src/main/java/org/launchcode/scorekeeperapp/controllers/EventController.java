@@ -1,6 +1,8 @@
 package org.launchcode.scorekeeperapp.controllers;
 
+import com.google.zxing.WriterException;
 import org.launchcode.scorekeeperapp.models.Event;
+import org.launchcode.scorekeeperapp.models.QRCodeGenerator;
 import org.launchcode.scorekeeperapp.models.Scores;
 import org.launchcode.scorekeeperapp.models.User;
 import org.launchcode.scorekeeperapp.models.data.EventRepository;
@@ -14,6 +16,9 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.io.IOException;
+import java.util.Base64;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("events")
@@ -48,6 +53,35 @@ public class EventController {
         return "events/index";
     }
 
+    @GetMapping("{eventId}")
+    public String displayViewEventPage(Model model, @PathVariable int eventId) {
+        String eventLink="https://localhost:8080/events/"+eventId;
+        byte[] image = new byte[0];
+        try{
+            image = QRCodeGenerator.getQRCodeImage(eventLink,250,250);
+        } catch (WriterException | IOException e) {
+            e.printStackTrace();
+        }
+        String qrcode = Base64.getEncoder().encodeToString(image);
+
+        model.addAttribute("eventLink",eventLink);
+        model.addAttribute("qrcode",qrcode);
+
+
+        Optional optEvent = eventRepository.findById(eventId);
+        Optional optScore = scoreRepository.findById(eventId);
+        if (optEvent.isPresent()) {
+            Event event = (Event) optEvent.get();
+            model.addAttribute("event", event);
+            if (optScore.isPresent()) {
+                Scores scores = (Scores) optScore.get();
+                model.addAttribute("scores", scores);
+            }
+            return "events/view";
+        } else {
+            return "redirect:../";
+        }
+    }
 
 
     @GetMapping("/play")
