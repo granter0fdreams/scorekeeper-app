@@ -1,6 +1,7 @@
 package org.launchcode.scorekeeperapp.controllers;
 
 import com.google.zxing.WriterException;
+import org.hibernate.Criteria;
 import org.launchcode.scorekeeperapp.models.Event;
 import org.launchcode.scorekeeperapp.models.QRCodeGenerator;
 import org.launchcode.scorekeeperapp.models.Scores;
@@ -70,7 +71,8 @@ public class EventController {
 
         Optional optEvent = eventRepository.findById(eventId);
         //Optional optScore = scoreRepository.findById(eventId);
-        Iterable<Scores> optScore = scoreRepository.findAll();
+        Scores optScore = scoreRepository.findByEventId(eventId);
+
         if (optEvent.isPresent()) {
             Event event = (Event) optEvent.get();
             model.addAttribute("event", event);
@@ -79,8 +81,6 @@ public class EventController {
             * if optScore has event_id = eventid
             * then add to some data structure, then pass to model
             * */
-
-
 
             //if (optScore.isPresent()) {
                 //Scores scores = (Scores) optScore.get(); //needs a way to filter by only event ID, find by checks for the main ID...
