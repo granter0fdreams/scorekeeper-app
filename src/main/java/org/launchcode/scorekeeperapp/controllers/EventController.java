@@ -70,24 +70,12 @@ public class EventController {
 
 
         Optional optEvent = eventRepository.findById(eventId);
-        //Optional optScore = scoreRepository.findById(eventId);
         Scores optScore = scoreRepository.findByEventId(eventId);
 
         if (optEvent.isPresent()) {
             Event event = (Event) optEvent.get();
             model.addAttribute("event", event);
-
-            /*
-            * if optScore has event_id = eventid
-            * then add to some data structure, then pass to model
-            * */
-
-            //if (optScore.isPresent()) {
-                //Scores scores = (Scores) optScore.get(); //needs a way to filter by only event ID, find by checks for the main ID...
-                model.addAttribute("scores", optScore);
-            //}
-            // TODO - Fix the score display here
-            //Right now its pulling all scores from all events, uncommenting and changing optScore to Scores will revert it once we have user and eventID's attached to scores.
+            model.addAttribute("scores", optScore);
             return "events/view";
         } else {
             return "redirect:../";
