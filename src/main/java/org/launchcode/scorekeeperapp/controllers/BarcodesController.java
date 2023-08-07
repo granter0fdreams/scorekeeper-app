@@ -42,5 +42,5 @@ public class BarcodesController {
         model.addAttribute("qrcode",qrcode);
 
         return "qrcode";
-        }
+        } //TODO - This can probably be deleted, its implemented in eventcontroller
 }
