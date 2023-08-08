@@ -8,14 +8,20 @@ import org.launchcode.scorekeeperapp.models.data.ScoreRepository;
 import org.launchcode.scorekeeperapp.models.data.UserRepository;
 import org.launchcode.scorekeeperapp.models.dto.userEventScoreDTO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
+import static org.springframework.web.util.WebUtils.setSessionAttribute;
+
 @Controller
+@Scope("session")
 @RequestMapping("events")
 public class EventController {
     @Autowired
@@ -31,12 +37,13 @@ public class EventController {
     }
 
     @PostMapping("create")
-    public String processCreateEventForm(@ModelAttribute @Valid Event event, Errors errors, Model model){
+    public String processCreateEventForm(@ModelAttribute @Valid Event event, Errors errors, Model model, HttpServletRequest request){
         if (errors.hasErrors()){
             model.addAttribute(new Event());
             model.addAttribute("title","Create Event");
             return "events/create";
         }
+        //request.setAttribute("event",event.getId());
         eventRepository.save(event);
         return "events/create";
     }
@@ -51,21 +58,25 @@ public class EventController {
 
 
     @GetMapping("/play")
-    public String showCreateForm(Model model) {
+    public String showCreateForm(Model model, HttpServletRequest request) {
         userEventScoreDTO uesdto = new userEventScoreDTO();
 
         for (int i = 1; i <= 9; i++) {
+            Scores score = new Scores();
+            score.setEventId((Integer) request.getAttribute("event"));
             uesdto.addScore(new Scores());
         }
+        model.addAttribute("title", "Play Event ${session.getAttribute('event'}");
         model.addAttribute("form", uesdto);
         return "events/play";
     }
 
     @PostMapping("save")
-    public String saveScores(@ModelAttribute userEventScoreDTO dto, Model model) {
+    public String saveScores(@ModelAttribute userEventScoreDTO dto, Model model, HttpServletRequest request) {
         scoreRepository.saveAll(dto.getScores());
 
         model.addAttribute("scores", scoreRepository.findAll());
+
         return "events/index"; //Temp redirect to index.
     }
 
