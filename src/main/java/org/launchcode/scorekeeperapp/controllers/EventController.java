@@ -85,12 +85,14 @@ public class EventController {
     }
 
 
-    @GetMapping("/play")
-    public String showCreateForm(Model model) {
+    @GetMapping("{eventId}/play")
+    public String showCreateForm(Model model, @PathVariable int eventId) {
         userEventScoreDTO uesdto = new userEventScoreDTO();
 
         for (int i = 1; i <= 9; i++) {
-            uesdto.addScore(new Scores());
+            Scores tempScore = new Scores();
+            tempScore.setEventId(eventId);
+            uesdto.addScore(tempScore);
         }
         model.addAttribute("form", uesdto);
         return "events/play";
