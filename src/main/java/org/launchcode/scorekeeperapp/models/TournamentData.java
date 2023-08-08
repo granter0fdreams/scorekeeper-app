@@ -1,11 +1,32 @@
 package org.launchcode.scorekeeperapp.models;
 
-import java.util.ArrayList;
-import java.util.List;
+import javax.persistence.Entity;
+import java.util.*;
 
 import static org.aspectj.runtime.internal.Conversions.intValue;
 
 public class TournamentData {
+
+    private static final Map<Integer, Event> events = new HashMap<>();
+
+    public static ArrayList<Event> getAll() {
+        return (ArrayList<Event>) events.values();
+    }
+
+    public TournamentData() {
+    }
+
+    public static ArrayList<Event> findByTypeAndValue(String category, String value, Iterable<Event> allTournaments) {
+        ArrayList<Event> results = new ArrayList();
+        if (category.toLowerCase().equals("tournamentName")) {
+            results = findTournamentByName(value, allTournaments);
+            return results;
+        } else if (category.equals("tournamentId")) {
+            results = findTournamentById(Integer.parseInt(value), allTournaments);
+            return results;
+        }
+        return results;
+    }
 
     public static ArrayList<Event> findTournamentByName(String value, Iterable<Event> allTournaments) {
 
@@ -15,7 +36,7 @@ public class TournamentData {
 
         for (Event tournamentName : allTournaments) {
 
-            if (tournamentName.getTournamentName().toLowerCase().contains(lower_val)) {
+            if (tournamentName.getName().toLowerCase().contains(lower_val)) {
                 results.add(tournamentName);
             } else {
                 System.out.println("No results found");
@@ -26,22 +47,21 @@ public class TournamentData {
         return results;
     }
 
-    public List<Event> findTournamentById(int tournamentId, Iterable<Event> allTournaments) {
+    public static ArrayList<Event> findTournamentById(int tournamentId, Iterable<Event> allTournaments) {
 
         int eventId = Event.getId();
 
-        List<Event> results = new ArrayList<>();
+        ArrayList<Event> results = new ArrayList<>();
 
         for (Event event : allTournaments) {
 
             if (intValue(eventId) == intValue(tournamentId)) {
                 results.add(event);
-            } else {
-                System.out.println("No results found");
             }
+
+            return results;
+
         }
-
         return results;
-
     }
 }

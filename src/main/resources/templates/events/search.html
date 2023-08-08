@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+<body>
+
+<div th:replace="fragments :: page-header"></div>
+
+<div class="container body-content">
+
+    <h1 th:text="${#strings.capitalizeWords(title)}"></h1>
+
+    <form th:action="@{/search/results}" method = "post">
+        <h2>Search by:</h2>
+
+        <p>
+            <span th:each="category : ${categories}">
+                <input
+                        type="radio"
+                        name="searchCategory"
+                        th:id="${category.key}"
+                        th:value="${category.key}"
+                        th:checked="${category.key == 'all'}"/>
+                <label th:for="${category.key}" th:text="${category.value}"></label>
+            </span>
+
+        </p>
+
+        <p>
+            <label for="value">Keyword:</label>
+            <input type="text" name="value" id="value" />
+        </p>
+
+        <input type="submit" value="Search" />
+    </form>
+
+    <hr />
+
+</div>
+
+
+
+</body>
+</html>
