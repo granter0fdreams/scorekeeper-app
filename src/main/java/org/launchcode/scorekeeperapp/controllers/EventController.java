@@ -1,7 +1,6 @@
 package org.launchcode.scorekeeperapp.controllers;
 
 import com.google.zxing.WriterException;
-import org.hibernate.Criteria;
 import org.launchcode.scorekeeperapp.models.Event;
 import org.launchcode.scorekeeperapp.models.QRCodeGenerator;
 import org.launchcode.scorekeeperapp.models.Scores;
@@ -19,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.io.IOException;
 import java.util.Base64;
+import java.util.HashMap;
 import java.util.Optional;
 
 @Controller
@@ -28,6 +28,8 @@ public class EventController {
     private EventRepository eventRepository;
     @Autowired
     private ScoreRepository scoreRepository;
+    @Autowired
+    private UserRepository userRepository;
 
     @GetMapping("create")
     public String displayCreateEventForm(Model model){
@@ -68,14 +70,13 @@ public class EventController {
         model.addAttribute("eventLink",eventLink);
         model.addAttribute("qrcode",qrcode);
 
-
-        Optional optEvent = eventRepository.findById(eventId);
-        Scores optScore = scoreRepository.findByEventId(eventId);
+        Optional<Event> optEvent = eventRepository.findById(eventId);
+        Scores score = scoreRepository.findByEventId(eventId);
 
         if (optEvent.isPresent()) {
             Event event = (Event) optEvent.get();
             model.addAttribute("event", event);
-            model.addAttribute("scores", optScore);
+            model.addAttribute("scores", score);
             return "events/view";
         } else {
             return "redirect:../";

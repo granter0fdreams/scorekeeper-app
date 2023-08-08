@@ -21,6 +21,7 @@
     <tr th:each="score : ${scores}">
         <td th:text="${score.position}"></td>
         <td th:text="${score.score}"></td>
+        <td th:text="${score.username}"></td>
         <td th:text="${score.userId}"></td>
     </tr>
 </table>

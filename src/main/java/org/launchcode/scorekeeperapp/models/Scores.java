@@ -5,16 +5,18 @@ import javax.persistence.Entity;
 @Entity
 public class Scores extends AbstractEntity{
 
+        private String username;
         private Integer userId;
         private Integer eventId;
         private Integer position;
         private Integer score;
 
-        public Scores (Integer userId, Integer eventId, Integer position, Integer score){
+        public Scores (Integer userId, Integer eventId, Integer position, Integer score, String username){
             this.userId = userId;
             this.eventId = eventId;
             this.position = position;
             this.score = score;
+            this.username = username;
         }
         public Scores(){}
 
@@ -48,5 +50,13 @@ public class Scores extends AbstractEntity{
 
         public void setScore(Integer score) {
                 this.score = score;
+        }
+
+        public String getUsername() {
+                return username;
+        }
+
+        public void setUsername(String username) {
+                this.username = username;
         }
 }

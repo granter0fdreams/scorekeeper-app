@@ -8,6 +8,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ScoreRepository extends CrudRepository<Scores,Integer> {
     //Scores findByEventId(String event_id);
-
     Scores findByEventId(int eventId);
 }
