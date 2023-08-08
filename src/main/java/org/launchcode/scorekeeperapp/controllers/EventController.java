@@ -43,9 +43,9 @@ public class EventController {
             model.addAttribute("title","Create Event");
             return "events/create";
         }
-        //request.setAttribute("event",event.getId());
+        request.setAttribute("event",event.getId());
         eventRepository.save(event);
-        return "events/create";
+        return "events/play";
     }
 
     @GetMapping("/index")
