@@ -61,12 +61,12 @@ public class EventController {
     public String showCreateForm(Model model, HttpServletRequest request) {
         userEventScoreDTO uesdto = new userEventScoreDTO();
 
-        for (int i = 1; i <= 9; i++) {
-            Scores scores = new Scores();
-            scores.setEventId((Integer) request.getAttribute("event"));
-            uesdto.addScore(new Scores());
-        }
-        //model.addAttribute("title", "Play Event ${session.getAttribute('event'}");
+//        for (int i = 1; i <= 9; i++) {
+//            Scores scores = new Scores();
+//            scores.setEventId((Integer) request.getAttribute("event"));
+//            uesdto.addScore(new Scores());
+//        }
+        model.addAttribute("title", "Play Event ${session.getAttribute('event'}");
         model.addAttribute("form", uesdto);
         return "events/play";
     }
