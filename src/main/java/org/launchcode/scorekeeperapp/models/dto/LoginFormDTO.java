@@ -15,7 +15,7 @@ public class LoginFormDTO {
     @NotBlank
     @Size(min = 5, max = 30, message = "Invalid password. Must be between 5 and 30 characters.")
     private String password;
-    @NotBlank
+//    @NotBlank
     @Email(message = "Invalid email. Try again.")
     private String email;
 
