@@ -62,11 +62,11 @@ public class EventController {
         userEventScoreDTO uesdto = new userEventScoreDTO();
 
         for (int i = 1; i <= 9; i++) {
-            Scores score = new Scores();
-            score.setEventId((Integer) request.getAttribute("event"));
+            Scores scores = new Scores();
+            scores.setEventId((Integer) request.getAttribute("event"));
             uesdto.addScore(new Scores());
         }
-        model.addAttribute("title", "Play Event ${session.getAttribute('event'}");
+        //model.addAttribute("title", "Play Event ${session.getAttribute('event'}");
         model.addAttribute("form", uesdto);
         return "events/play";
     }
