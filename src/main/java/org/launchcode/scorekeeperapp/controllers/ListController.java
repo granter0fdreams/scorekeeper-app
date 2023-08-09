@@ -3,8 +3,6 @@ package org.launchcode.scorekeeperapp.controllers;
 import org.launchcode.scorekeeperapp.models.Event;
 import org.launchcode.scorekeeperapp.models.TournamentData;
 import org.launchcode.scorekeeperapp.models.data.EventRepository;
-import org.launchcode.scorekeeperapp.models.data.ScoreRepository;
-import org.launchcode.scorekeeperapp.models.data.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,11 +18,7 @@ public class ListController {
 
         @Autowired
         private EventRepository eventRepository;
-        @Autowired
-        private ScoreRepository scoreRepository;
-        @Autowired
-        private UserRepository userRepository;
-        static HashMap<String, String> searchChoices = new HashMap();
+        static HashMap<String, String> searchChoices = new HashMap<>();
 
     public ListController() {
         searchChoices.put("all", "All");
@@ -41,12 +35,11 @@ public class ListController {
 
     @RequestMapping({"tournaments"})
     public String listTournamentsByNameAndId(Model model, @RequestParam String category, @RequestParam String value) {
-        Event eventInst = new Event();
         List<Event> tournaments = new ArrayList<>();
-        if (category.toLowerCase().equals("tournamentName")) {
+        if (category.equals("tournamentName")) {
             tournaments = TournamentData.findTournamentByName(value, this.eventRepository.findAll());
             model.addAttribute("title", "Tournament Results");
-        } else if (category.toLowerCase().equals("eventId")){
+        } else if (category.equals("eventId")){
             tournaments = TournamentData.findByTypeAndValue(category, value, this.eventRepository.findAll());
             model.addAttribute("title", "Tournament Results");
         }

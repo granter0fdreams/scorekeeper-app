@@ -1,6 +1,5 @@
 package org.launchcode.scorekeeperapp.controllers;
 
-import com.sun.java.accessibility.util.EventID;
 import org.launchcode.scorekeeperapp.models.Event;
 import org.launchcode.scorekeeperapp.models.TournamentData;
 import org.launchcode.scorekeeperapp.models.data.EventRepository;
@@ -33,14 +32,13 @@ public class SearchController {
     public String displaySearchResults(Model model, @RequestParam String searchCategory) {
         Event eventInst = new Event();
         List<Event> tournaments = new ArrayList<>();
-        if (searchCategory.toLowerCase().equals("tournamentName")) {
+        if (searchCategory.equals("tournamentName")) {
             tournaments = TournamentData.findTournamentByName(searchCategory, this.eventRepository.findAll());
-        } else if (searchCategory.toLowerCase().equals("tournamentId")) {
+        } else if (searchCategory.equals("tournamentId")) {
             tournaments = TournamentData.findTournamentById(eventInst.getId(), this.eventRepository.findAll());
         }
 
         model.addAttribute("categories", ListController.searchChoices);
-        String var10002 = ListController.searchChoices.get(searchCategory);
         model.addAttribute("tournaments", tournaments);
         return "search";
     }
