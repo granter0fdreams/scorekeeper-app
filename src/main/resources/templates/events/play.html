@@ -5,28 +5,26 @@
     <title>Add Auto Generated Event Info Here</title>
 </head>
 <body>
-
-This is the play area for the event.
-<span th:text="${event.getId()}"></span>
+<!--<span th:text="${event.getId()}"></span>-->
 <form action="#" th:action="@{/events/save}" th:object="${form}"
       method="post">
     <fieldset>
         <input type="submit" id="submitButton" th:value="Save">
         <input type="reset" id="resetButton" name="reset" th:value="Reset"/>
-<!--        <table>-->
-<!--            <thead>-->
-<!--            <tr>-->
-<!--                <th>Hole</th>-->
-<!--                <th>Score</th>-->
-<!--            </tr>-->
-<!--            </thead>-->
-<!--            <tbody>-->
-<!--            <tr th:each="score, itemStat : *{scores}">-->
-<!--                <td><input th:field="*{scores[__${itemStat.index}__].position}" /></td>-->
-<!--                <td><input th:field="*{scores[__${itemStat.index}__].score}" /></td>-->
-<!--            </tr>-->
-<!--            </tbody>-->
-<!--        </table>-->
+        <table>
+            <thead>
+            <tr>
+                <th>Hole</th>
+                <th>Score</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="score, itemStat : *{scores}">
+                <td><input th:field="*{scores[__${itemStat.index}__].position}" /></td>
+                <td><input th:field="*{scores[__${itemStat.index}__].score}" /></td>
+            </tr>
+            </tbody>
+        </table>
     </fieldset>
 </form>
 

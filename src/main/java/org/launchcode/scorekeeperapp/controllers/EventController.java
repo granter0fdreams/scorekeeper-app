@@ -43,9 +43,14 @@ public class EventController {
             model.addAttribute("title","Create Event");
             return "events/create";
         }
-        request.setAttribute("event",event.getId());
+       // userEventScoreDTO uesdto = new userEventScoreDTO();
+       // model.addAttribute("form", uesdto);
+
         eventRepository.save(event);
-        return "events/play";
+        HttpSession session = request.getSession();
+        session.setAttribute("event", event.getId());
+        //System.out.println("Event ID: " + event.getId());
+        return "redirect:/events/play";
     }
 
     @GetMapping("/index")
@@ -60,12 +65,17 @@ public class EventController {
     @GetMapping("/play")
     public String showCreateForm(Model model, HttpServletRequest request) {
         userEventScoreDTO uesdto = new userEventScoreDTO();
+        HttpSession session = request.getSession();
+        String attribute = session.getAttribute("event").toString();
+        Integer attributeInt = Integer.parseInt(attribute);
 
-//        for (int i = 1; i <= 9; i++) {
-//            Scores scores = new Scores();
-//            scores.setEventId((Integer) request.getAttribute("event"));
-//            uesdto.addScore(new Scores());
-//        }
+        for (int i = 1; i <= 9; i++) {
+            Scores score = new Scores();
+            uesdto.addScore(score);
+        }
+        for (Scores sc : uesdto.getScores()) {
+            sc.setEventId(attributeInt);
+        }
         model.addAttribute("title", "Play Event ${session.getAttribute('event'}");
         model.addAttribute("form", uesdto);
         return "events/play";

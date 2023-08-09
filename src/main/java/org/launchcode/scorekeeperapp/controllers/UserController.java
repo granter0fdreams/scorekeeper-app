@@ -131,7 +131,7 @@ public class UserController {
 
         setUserInSession(request.getSession(), theUser);
 
-        return "redirect:/events/create";
+        return "/events/create";
     }
 
     @GetMapping("logout")
