@@ -49,13 +49,13 @@ public class TournamentData {
 
     public static ArrayList<Event> findTournamentById(int tournamentId, Iterable<Event> allTournaments) {
 
-        int eventId = Event.getId();
+        Event eventInst = new Event();
 
         ArrayList<Event> results = new ArrayList<>();
 
         for (Event event : allTournaments) {
 
-            if (intValue(eventId) == intValue(tournamentId)) {
+            if (intValue(eventInst.getId()) == intValue(tournamentId)) {
                 results.add(event);
             }
 

@@ -1,5 +1,6 @@
 package org.launchcode.scorekeeperapp.controllers;
 
+import org.launchcode.scorekeeperapp.models.Event;
 import org.launchcode.scorekeeperapp.models.TournamentData;
 import org.launchcode.scorekeeperapp.models.data.EventRepository;
 import org.launchcode.scorekeeperapp.models.data.ScoreRepository;
@@ -10,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 @Controller
@@ -29,16 +31,17 @@ public class ListController {
         searchChoices.put("eventId", "Tournament Id");
     }
 
-        @RequestMapping({""})
-        public String listTournaments(Model model) {
+    @RequestMapping({""})
+    public String listTournaments(Model model) {
         model.addAttribute("title", "Tournament List");
         model.addAttribute("tournaments", this.eventRepository.findAll());
         return "list";
     }
 
-        @RequestMapping({"tournaments"})
-        public String listTournamentsByNameAndId(Model model, @RequestParam String category, @RequestParam String value) {
-        Object tournaments = null;
+    @RequestMapping({"tournaments"})
+    public String listTournamentsByNameAndId(Model model, @RequestParam String category, @RequestParam String value) {
+        Event eventInst = new Event();
+        ArrayList<Event> tournaments = new ArrayList<>();
         if (category.toLowerCase().equals("tournamentName")) {
             tournaments = TournamentData.findTournamentByName(value, this.eventRepository.findAll());
             model.addAttribute("title", "Tournament Results");

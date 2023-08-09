@@ -29,13 +29,14 @@ public class SearchController {
         return "search";
     }
 
-        @PostMapping({"results"})
-        public String displaySearchResults(Model model, @RequestParam String searchCategory) {
-        Object tournaments = null;
+    @PostMapping({"results"})
+    public String displaySearchResults(Model model, @RequestParam String searchCategory) {
+        Event eventInst = new Event();
+        ArrayList<Event> tournaments = new ArrayList<>();
         if (searchCategory.toLowerCase().equals("tournamentName")) {
             tournaments = TournamentData.findTournamentByName(searchCategory, this.eventRepository.findAll());
         } else if (searchCategory.toLowerCase().equals("tournamentId")) {
-            tournaments = TournamentData.findTournamentById(Event.getId(), this.eventRepository.findAll());
+            tournaments = TournamentData.findTournamentById(eventInst.getId(), this.eventRepository.findAll());
         }
 
         model.addAttribute("categories", ListController.searchChoices);

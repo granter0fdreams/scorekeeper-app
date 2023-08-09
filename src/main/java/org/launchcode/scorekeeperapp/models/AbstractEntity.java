@@ -13,11 +13,11 @@ public abstract class AbstractEntity {
 //An abstract class to use when making players, administrators and potentially even tournaments.
     @Id
     @GeneratedValue
-    private static int id;
+    private int id;
     //The object id will be the primary way to differentiate players/admins/tournaments
     //in the database.
 
-    public static int getId() {
+    public int getId() {
         return id;
     }
 
