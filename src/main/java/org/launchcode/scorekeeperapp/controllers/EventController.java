@@ -71,7 +71,10 @@ public class EventController {
         model.addAttribute("qrcode",qrcode);
 
         Optional<Event> optEvent = eventRepository.findById(eventId);
-        Scores score = scoreRepository.findByEventId(eventId);
+
+        Iterable<Scores> score = scoreRepository.findAll();
+
+
 
         if (optEvent.isPresent()) {
             Event event = (Event) optEvent.get();
@@ -85,14 +88,12 @@ public class EventController {
     }
 
 
-    @GetMapping("{eventId}/play")
-    public String showCreateForm(Model model, @PathVariable int eventId) {
+    @GetMapping("/play")
+    public String showCreateForm(Model model) {
         userEventScoreDTO uesdto = new userEventScoreDTO();
 
         for (int i = 1; i <= 9; i++) {
-            Scores tempScore = new Scores();
-            tempScore.setEventId(eventId);
-            uesdto.addScore(tempScore);
+            uesdto.addScore(new Scores());
         }
         model.addAttribute("form", uesdto);
         return "events/play";

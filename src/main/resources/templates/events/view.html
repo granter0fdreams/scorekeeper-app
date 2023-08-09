@@ -15,18 +15,32 @@
 <table class="table table-striped">
     <thead>
     <tr>
-        <th>All Scores</th>
+        <th>Individual Scores</th>
     </tr>
     </thead>
     <tr th:each="score : ${scores}">
-        <td th:text="${score.position}"></td>
-        <td th:text="${score.score}"></td>
-        <td th:text="${score.username}"></td>
-        <td th:text="${score.userId}"></td>
+        <span th:if="${score.eventId == event.id}">
+            <td th:text="${score.position}"></td>
+            <td th:text="${score.score}"></td>
+            <td th:text="${score.username}"></td>
+            <td th:text="${score.userId}"></td>
+        </span>
     </tr>
 </table>
 
-
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th>Total Scores</th>
+    </tr>
+    </thead>
+    <tr th:each="score : ${scores}">
+        <span th:if="${score.eventId == event.id}">
+            <td th:text="${score.score}"></td>
+            <td th:text="${score.username}"></td>
+        </span>
+    </tr>
+</table>
 
 </body>
 </html>
