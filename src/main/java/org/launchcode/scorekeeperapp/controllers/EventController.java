@@ -73,9 +73,6 @@ public class EventController {
             Scores score = new Scores();
             uesdto.addScore(score);
         }
-        for (Scores sc : uesdto.getScores()) {
-            sc.setEventId(attributeInt);
-        }
         model.addAttribute("title", "Play Event ${session.getAttribute('event'}");
         model.addAttribute("form", uesdto);
         return "events/play";
@@ -83,6 +80,13 @@ public class EventController {
 
     @PostMapping("save")
     public String saveScores(@ModelAttribute userEventScoreDTO dto, Model model, HttpServletRequest request) {
+
+        HttpSession session = request.getSession();
+        String attribute = session.getAttribute("event").toString();
+        Integer attributeInt = Integer.parseInt(attribute);
+        for (Scores score : dto.getScores()) {
+            score.setEventId(attributeInt);
+        }
         scoreRepository.saveAll(dto.getScores());
 
         model.addAttribute("scores", scoreRepository.findAll());
