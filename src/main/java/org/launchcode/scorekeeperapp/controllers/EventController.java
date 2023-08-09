@@ -67,8 +67,9 @@ public class EventController {
         userEventScoreDTO uesdto = new userEventScoreDTO();
         HttpSession session = request.getSession();
         Integer attributeInt = (Integer) session.getAttribute("event");
+        Event newEvent = eventRepository.findById(attributeInt).orElse(null);
 
-        for (int i = 1; i <= 9; i++) {
+        for (int i = 1; i <= newEvent.getHoles(); i++) {
             Scores score = new Scores();
             uesdto.addScore(score);
         }
