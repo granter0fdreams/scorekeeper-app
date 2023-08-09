@@ -66,8 +66,7 @@ public class EventController {
     public String showCreateForm(Model model, HttpServletRequest request) {
         userEventScoreDTO uesdto = new userEventScoreDTO();
         HttpSession session = request.getSession();
-        String attribute = session.getAttribute("event").toString();
-        Integer attributeInt = Integer.parseInt(attribute);
+        Integer attributeInt = (Integer) session.getAttribute("event");
 
         for (int i = 1; i <= 9; i++) {
             Scores score = new Scores();
@@ -82,8 +81,7 @@ public class EventController {
     public String saveScores(@ModelAttribute userEventScoreDTO dto, Model model, HttpServletRequest request) {
 
         HttpSession session = request.getSession();
-        String attribute = session.getAttribute("event").toString();
-        Integer attributeInt = Integer.parseInt(attribute);
+        Integer attributeInt = (Integer) session.getAttribute("event");
         for (Scores score : dto.getScores()) {
             score.setEventId(attributeInt);
         }
