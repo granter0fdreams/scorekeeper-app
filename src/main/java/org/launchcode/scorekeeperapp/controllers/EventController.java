@@ -71,8 +71,9 @@ public class EventController {
         model.addAttribute("qrcode",qrcode);
 
         Optional<Event> optEvent = eventRepository.findById(eventId);
-
         Iterable<Scores> score = scoreRepository.findAll();
+
+        //score.forEach(); This could maybe be useful, prob ask for help at this point.
 
 
 
