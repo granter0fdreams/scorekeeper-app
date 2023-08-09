@@ -32,7 +32,7 @@ public class SearchController {
     @PostMapping({"results"})
     public String displaySearchResults(Model model, @RequestParam String searchCategory) {
         Event eventInst = new Event();
-        ArrayList<Event> tournaments = new ArrayList<>();
+        List<Event> tournaments = new ArrayList<>();
         if (searchCategory.toLowerCase().equals("tournamentName")) {
             tournaments = TournamentData.findTournamentByName(searchCategory, this.eventRepository.findAll());
         } else if (searchCategory.toLowerCase().equals("tournamentId")) {

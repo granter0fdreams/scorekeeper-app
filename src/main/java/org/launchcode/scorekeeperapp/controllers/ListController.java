@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 @Controller
 public class ListController {
@@ -41,7 +42,7 @@ public class ListController {
     @RequestMapping({"tournaments"})
     public String listTournamentsByNameAndId(Model model, @RequestParam String category, @RequestParam String value) {
         Event eventInst = new Event();
-        ArrayList<Event> tournaments = new ArrayList<>();
+        List<Event> tournaments = new ArrayList<>();
         if (category.toLowerCase().equals("tournamentName")) {
             tournaments = TournamentData.findTournamentByName(value, this.eventRepository.findAll());
             model.addAttribute("title", "Tournament Results");

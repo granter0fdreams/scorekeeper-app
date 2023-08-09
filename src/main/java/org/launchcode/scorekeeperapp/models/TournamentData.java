@@ -15,8 +15,8 @@ public class TournamentData {
     public TournamentData() {
     }
 
-    public static ArrayList<Event> findByTypeAndValue(String category, String value, Iterable<Event> allTournaments) {
-        ArrayList<Event> results = new ArrayList();
+    public static List<Event> findByTypeAndValue(String category, String value, Iterable<Event> allTournaments) {
+        List<Event> results = new ArrayList();
         if (category.toLowerCase().equals("tournamentName")) {
             results = findTournamentByName(value, allTournaments);
             return results;
@@ -27,11 +27,11 @@ public class TournamentData {
         return results;
     }
 
-    public static ArrayList<Event> findTournamentByName(String value, Iterable<Event> allTournaments) {
+    public static List<Event> findTournamentByName(String value, Iterable<Event> allTournaments) {
 
         String lower_val = value.toLowerCase();
 
-        ArrayList<Event> results = new ArrayList<>();
+        List<Event> results = new ArrayList<>();
 
         for (Event tournamentName : allTournaments) {
 
@@ -46,11 +46,11 @@ public class TournamentData {
         return results;
     }
 
-    public static ArrayList<Event> findTournamentById(int tournamentId, Iterable<Event> allTournaments) {
+    public static List<Event> findTournamentById(int tournamentId, Iterable<Event> allTournaments) {
 
         Event eventInst = new Event();
 
-        ArrayList<Event> results = new ArrayList<>();
+        List<Event> results = new ArrayList<>();
 
         for (Event event : allTournaments) {
 
