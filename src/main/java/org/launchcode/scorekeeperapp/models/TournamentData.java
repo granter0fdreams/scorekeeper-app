@@ -1,6 +1,5 @@
 package org.launchcode.scorekeeperapp.models;
 
-import javax.persistence.Entity;
 import java.util.*;
 
 import static org.aspectj.runtime.internal.Conversions.intValue;
