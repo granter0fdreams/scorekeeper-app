@@ -4,12 +4,10 @@
 <body class="container">
 <h1>Events</h1>
 
-<table class="table table-striped">
+<table th:object="${events}" class="table table-striped" >
     <thead>
     <tr>
         <th>All Events</th>
-
-        Please Choose and event to join.
     </tr>
     </thead>
     <tr th:each="event : ${events}">
