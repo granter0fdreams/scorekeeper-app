@@ -115,6 +115,7 @@ public class UserController {
         }
 
         setUserInSession(request.getSession(), theUser);
+        System.out.println("Login successful");
 
         return "redirect:/events/create";
     }
