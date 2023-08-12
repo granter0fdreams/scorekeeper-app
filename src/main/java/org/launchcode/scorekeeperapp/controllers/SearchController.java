@@ -40,6 +40,6 @@ public class SearchController {
 
         model.addAttribute("categories", ListController.searchChoices);
         model.addAttribute("tournaments", tournaments);
-        return "search";
+        return "search/search";
     }
 }
