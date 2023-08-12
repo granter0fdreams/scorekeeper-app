@@ -25,7 +25,7 @@ public class SearchController {
         @RequestMapping({""})
         public String searchByIdOrName(Model model) {
         model.addAttribute("categories", ListController.searchChoices);
-        return "search";
+        return "search/list";
     }
 
     @PostMapping({"results"})
