@@ -1,12 +1,24 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th = "http://www.thymeleaf.org/">
-<head>
-    <meta charset="UTF-8">
-    <link href="../static/css/styles.css" th:href="@{/css/styles.css}" rel="stylesheet" />
-    <title>ScoreBoard</title>
-</head>
+<head th:replace="fragment :: head"></head>
 <body>
-<h1> ScoreBoard</h1>
 
+<h1> ScoreBoard</h1>
+<!--
+<table class="table table-striped">
+
+    <thead>
+    <tr>
+        <th>All Scores</th>
+    </tr>
+    </thead>
+    <tr th:each="score : ${scores}">
+        <td th:text="${score.position}"></td>
+        <td th:text="${score.score}"></td>
+        <td th:text="${score.username}"></td>
+        <td th:text="${score.userId}"></td>
+    </tr>
+</table>
+-->
 </body>
 </html>

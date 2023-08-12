@@ -58,18 +58,22 @@ public class EventController {
 
     @GetMapping("{eventId}")
     public String displayViewEventPage(Model model, @PathVariable int eventId) {
-        String eventLink="https://localhost:8080/events/"+eventId;
+        String eventLink = "https://localhost:8080/events/" + eventId;
         byte[] image = new byte[0];
-        try{
-            image = QRCodeGenerator.getQRCodeImage(eventLink,250,250);
+        try {
+            image = QRCodeGenerator.getQRCodeImage(eventLink, 250, 250);
         } catch (WriterException | IOException e) {
             e.printStackTrace();
         }
         String qrcode = Base64.getEncoder().encodeToString(image);
 
-        model.addAttribute("eventLink",eventLink);
-        model.addAttribute("qrcode",qrcode);
+        model.addAttribute("eventLink", eventLink);
+        model.addAttribute("qrcode", qrcode);
+        return "events/view";
+    }
 
+    @PostMapping("scoreboard")
+    public String displayScoresInScoreboard(Model model, int eventId) {
         Optional<Event> optEvent = eventRepository.findById(eventId);
         Scores score = scoreRepository.findByEventId(eventId);
 
