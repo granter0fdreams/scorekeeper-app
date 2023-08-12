@@ -129,7 +129,9 @@ public class UserController {
             return "user/login";
         }
 
+
         setUserInSession(request.getSession(), theUser);
+        request.setAttribute("user", theUser.getId());
 
         return "/events/create";
     }

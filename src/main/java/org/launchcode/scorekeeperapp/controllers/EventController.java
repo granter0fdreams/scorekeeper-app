@@ -83,8 +83,10 @@ public class EventController {
 
         HttpSession session = request.getSession();
         Integer attributeInt = (Integer) session.getAttribute("event");
+        Integer userId = (Integer) session.getAttribute("user");
         for (Scores score : dto.getScores()) {
             score.setEventId(attributeInt);
+            score.setUserId(userId);
         }
         scoreRepository.saveAll(dto.getScores());
 
