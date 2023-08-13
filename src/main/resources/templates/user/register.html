@@ -3,9 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <link href="../static/css/styles.css" th:href="@{/css/styles.css}" rel="stylesheet" />
-    <title>Host a Tournament</title>
+    <title>Register Account</title>
 </head>
 <body>
+
+This is where the user will register an account.
+
 <!--<h1>Register an Account</h1>-->
 <!--<form method = 'post' th:action="@{/user/register}">-->
 <!--    <label>-->
@@ -35,5 +38,10 @@
 <!--    <input type = 'submit' value = 'Create Account'/>-->
 <!--</form>-->
 <!--<a href="/login">Already Have an Account</a>-->
+
+<form action="/events/index">
+    <input type="submit" value="Register and Play" />
+</form>
+
 </body>
 </html>

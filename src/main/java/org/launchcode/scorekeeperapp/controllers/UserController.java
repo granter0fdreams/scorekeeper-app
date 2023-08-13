@@ -81,6 +81,21 @@ public class UserController {
         return "redirect:/events/create";
     }
 
+    @GetMapping("join")
+    public String displayJoinPage(Model model){
+        model.addAttribute("title", "Please select an event to join.");
+    return "user/join";
+    }
+
+    @GetMapping("register")
+    public String displayRegisterForm() {
+        return "user/register";
+    }
+    @PostMapping("register")
+    public String sendUserToEventIndex() {
+        return "redirect:events/index";
+    }
+
     @GetMapping("login")
     public String displayLoginForm(Model model) {
         model.addAttribute("loginFormDTO", new LoginFormDTO());
@@ -114,7 +129,10 @@ public class UserController {
             return "user/login";
         }
 
+
         setUserInSession(request.getSession(), theUser);
+        request.setAttribute("user", theUser.getId());
+
 
         return "redirect:/events/create";
     }
