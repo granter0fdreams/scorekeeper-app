@@ -90,12 +90,44 @@ public class UserController {
     return "user/join";
     }
 
-    @GetMapping("register")
-    public String displayRegisterForm() {
-        return "user/register";
+    @GetMapping("registertoplay")
+    public String displayRegisterToPlayForm(Model model) {
+        model.addAttribute(new RegisterFormDTO());
+        model.addAttribute("user", "Register");
+        return "user/registertoplay";
     }
-    @PostMapping("register")
-    public String sendUserToEventIndex() {
+    @PostMapping("registertoplay")
+    public String sendUserToEventIndex(@ModelAttribute @Valid RegisterFormDTO registerFormDTO,
+                                       Errors errors, HttpServletRequest request,
+                                       Model model) {
+        if (errors.hasErrors()) {
+            model.addAttribute("user", "Register");
+            return "user/registertoplay";
+        }
+
+        User existingUser = userRepository.findByUsername(registerFormDTO.getUsername());
+
+        if (existingUser != null) {
+            errors.rejectValue("username", "username.alreadyexists", "A user with that username already exists");
+            model.addAttribute("user", "Register");
+            return "user/registertoplay";
+        }
+
+        String password = registerFormDTO.getPassword();
+        String verifyPassword = registerFormDTO.getVerifyPassword();
+        if (!password.equals(verifyPassword)) {
+            errors.rejectValue("password", "passwords.mismatch", "Passwords do not match");
+            model.addAttribute("user", "Register");
+            return "user/registertoplay";
+        }
+
+        User newUser = new User(registerFormDTO.getUsername(), registerFormDTO.getEmail(),registerFormDTO.getPassword());
+        userRepository.save(newUser);
+        setUserInSession(request.getSession(), newUser);
+        HttpSession session = request.getSession();
+        session.setAttribute("user", newUser.getId());
+        session.setAttribute("username", newUser.getUsername());
+
         return "redirect:events/index";
     }
 
