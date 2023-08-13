@@ -175,10 +175,54 @@ public class UserController {
         return "redirect:/events/create";
     }
 
+    @GetMapping("logintoplay")
+    public String displayLoginToPlayForm(Model model) {
+        model.addAttribute("loginFormDTO", new LoginFormDTO());
+        model.addAttribute("user", "Log In");
+        return "user/logintoplay";
+    }
+
+    @PostMapping("logintoplay")
+    public String processLoginToPlayForm(@ModelAttribute @Valid LoginFormDTO loginFormDTO,
+                                   Errors errors, HttpServletRequest request,
+                                   Model model) {
+
+        if (errors.hasErrors()) {
+            model.addAttribute("user", "Log In");
+            return "user/login";
+        }
+
+        User theUser = userRepository.findByUsername(loginFormDTO.getUsername());
+
+        if (theUser == null) {
+            errors.rejectValue("username", "user.invalid", "The given username does not exist");
+            model.addAttribute("user", "Log In");
+            return "user/login";
+        }
+
+        String password = loginFormDTO.getPassword();
+
+        if (!theUser.isMatchingPassword(password)) {
+            errors.rejectValue("password", "password.invalid", "Invalid password");
+            model.addAttribute("user", "Log In");
+            return "user/login";
+        }
+
+
+        setUserInSession(request.getSession(), theUser);
+        HttpSession session = request.getSession();
+        session.setAttribute("user", theUser.getId());
+        session.setAttribute("userName", theUser.getUsername());
+        //System.out.println(theUser.getUsername());
+
+
+        return "redirect:/events/index";
+    }
+
     @GetMapping("logout")
-    public void logout(HttpServletRequest request){
+    public String logout(HttpServletRequest request){
         request.getSession().invalidate();
-        //return "user/login";
+        return "redirect:user/login";
     }
 
 }

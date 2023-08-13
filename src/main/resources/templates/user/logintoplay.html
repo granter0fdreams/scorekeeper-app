@@ -2,13 +2,12 @@
 <html lang="en" xmlns:th = "http://www.thymeleaf.org/">
 <head>
   <meta charset="UTF-8">
-<!--  <link href="../static/css/styles.css" th:href="@{/css/styles.css}" rel="stylesheet" />-->
+  <!--  <link href="../static/css/styles.css" th:href="@{/css/styles.css}" rel="stylesheet" />-->
   <title>User Login</title>
 </head>
 <body>
-<h1>Host A Tournament</h1>
-<h2>Login</h2>
-<form method="post" th:action="@{/user/login}">
+<h1>Login to Play</h1>
+<form method="post" th:action="@{/user/logintoplay}">
   <div class="form-group">
     <label>Username
       <input class="form-control" th:field="${loginFormDTO.username}">
@@ -25,6 +24,6 @@
   <input type="submit" class="btn btn-primary" value="Log In" />
 </form>
 
-<p>Don't have an account? <a href="host">Create An Account.</a></p>
+<p>Don't have an account? <a href="registertoplay">Register to Play.</a></p>
 </body>
 </html>
