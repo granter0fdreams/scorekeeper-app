@@ -23,10 +23,14 @@ public class SearchController {
     @Autowired
     private EventRepository eventRepository;
 
-        @GetMapping({""})
+    public SearchController() {
+
+    }
+
+        @RequestMapping({""})
         public String searchByIdOrName(Model model) {
         model.addAttribute("categories", ListController.searchChoices);
-        return "search/list";
+        return "search";
     }
 
     @PostMapping({"results"})
@@ -41,6 +45,6 @@ public class SearchController {
 
         model.addAttribute("categories", ListController.searchChoices);
         model.addAttribute("tournaments", tournaments);
-        return "search/search";
+        return "search";
     }
 }
