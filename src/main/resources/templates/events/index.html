@@ -13,6 +13,13 @@
     <tr th:each="event : ${events}">
         <td th:text="${event.id}"></td>
         <td th:text="${event.name}"></td>
+
+<!--        <td>-->
+<!--            <li th:each="event : ${events}">-->
+<!--                <a th:href="@{/events/" +"${event.id}" th:text="${event.name}"></a>-->
+<!--            </li>-->
+<!--        </td>-->
+
     </tr>
 </table>
 
