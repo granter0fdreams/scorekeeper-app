@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="https://www.thymeleaf.org/">
-<head>
+<head th:replace="fragments :: head">
     <meta charset="UTF-8"/>
     <title>Example Barcodes</title>
 </head>
 <body>
+
+<header th:replace="fragments :: page-header"></header>
 <!--    <h1 style="text-align: center;">Qr Code Example using Java Spring boot</h1>-->
 
     <div style="width:40%;display: inline-block">

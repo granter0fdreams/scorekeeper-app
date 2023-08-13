@@ -2,8 +2,8 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
 <head th:replace="fragments :: head">Event Page</head>
 <body class="container">
-
-<h1 th:text="${'Event: ' + event.name}">Default Title</h1>
+<header th:replace="fragments :: page-header"></header>
+<h1 th:text="${'Event: ' + event.name}">Your Event</h1>
 <h3>Join Code</h3>
 <div>
 <!--    <p>Data : <span th:text="${eventLink}"></span></p>-->

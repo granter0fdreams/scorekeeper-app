@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th = "http://www.thymeleaf.org/">
-<head>
-  <meta charset="UTF-8">
-  <link href="../static/css/styles.css" th:href="@{/css/styles.css}" rel="stylesheet" />
-  <title>Welcome to ScoreKeeper</title>
-</head>
+<head th:replace="fragments :: head"></head>
 <body>
+<header th:replace="fragments :: page-header">
+  <title>Welcome to Scorekeeper</title>
+</header>
   <h1> Welcome to ScoreKeeper</h1>
     <a href="user/join">Join a Tournament</a>
     <a href="user/host">Host a Tournament</a>

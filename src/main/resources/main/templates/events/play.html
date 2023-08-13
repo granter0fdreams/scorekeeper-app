@@ -1,10 +1,8 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="https://www.thymeleaf.org/" xmlns="http://www.w3.org/1999/html">
-<head>
-    <meta charset="UTF-8"/>
-    <title>Add Auto Generated Event Info Here</title>
-</head>
+<head th:replace="fragments :: head"></head>
 <body>
+<header th:replace="fragments :: page-header"></header>
 <form action="#" th:action="@{/events/save}" th:object="${form}"
       method="post">
     <fieldset>
