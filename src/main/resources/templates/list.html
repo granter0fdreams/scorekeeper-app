@@ -10,25 +10,24 @@
 
 <table class="centeredTable">
     <tr>
-        <th>All</th>
+        <th>Tournament ID</th>
         <th>Tournament Name</th>
-        <th>Tournament Id</th>
     </tr>
 
     <tr>
         <td>
             <li>
-                <a th:href="@{/list/tournaments(category='All',value='View All')}">View All</a>
+                <a th:href="@{/list/tournaments(category='All',value='View All')}"></a>
+            </li>
+        </td>
+        <td>
+            <li th:each="eventId : ${tournaments}">
+                <a th:href="@{/list/tournaments(category=eventId,value=${eventId.id})}" th:text="${eventId.id}"></a>
             </li>
         </td>
         <td>
             <li th:each="tournamentName : ${tournaments}">
                 <a th:href="@{/list/tournaments(category=tournamentName,value=${tournamentName.name})}" th:text="${tournamentName.name}"></a>
-            </li>
-        </td>
-        <td>
-            <li th:each="eventId : ${tournaments}">
-                <a th:href="@{/list/tournaments(category=eventId,value=${eventId.name})}" th:text="${eventId.name}"></a>
             </li>
         </td>
     </tr>
