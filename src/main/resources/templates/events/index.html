@@ -10,17 +10,17 @@
         <th>All Events</th>
     </tr>
     </thead>
-    <tr th:each="event : ${events}">
-        <td th:text="${event.id}"></td>
-        <td th:text="${event.name}"></td>
+<!--    <tr th:each="event : ${events}">-->
+<!--        <td th:text="${event.id}"></td>-->
+<!--        <td th:text="${event.name}"></td>-->
 
-<!--        <td>-->
-<!--            <li th:each="event : ${events}">-->
-<!--                <a th:href="@{/events/" +"${event.id}" th:text="${event.name}"></a>-->
-<!--            </li>-->
-<!--        </td>-->
+        <td>
+            <li th:each="event : ${events}">
+                <a th:href="@{/events/{id}(id=${event.id})}" th:text="${event.name}"></a>
+            </li>
+        </td>
 
-    </tr>
+<!--    </tr>-->
 </table>
 
 </body>

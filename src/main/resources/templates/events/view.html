@@ -15,13 +15,16 @@
 <table class="table table-striped">
     <thead>
     <tr>
-        <th>All Scores</th>
+        <th>Hole</th>
+        <th>Score</th>
+        <th>Player</th>
     </tr>
+
     </thead>
     <tr th:each="score : ${scores}">
         <td th:text="${score.position}"></td>
         <td th:text="${score.score}"></td>
-        <td th:text="${score.userId}"></td>
+        <td th:text="${score.userName}"></td>
     </tr>
 </table>
 <!--TODO - Fix score display, see EventController displayViewEventPage-->

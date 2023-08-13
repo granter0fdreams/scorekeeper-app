@@ -77,6 +77,9 @@ public class UserController {
         User newUser = new User(registerFormDTO.getUsername(), registerFormDTO.getEmail(),registerFormDTO.getPassword());
         userRepository.save(newUser);
         setUserInSession(request.getSession(), newUser);
+        HttpSession session = request.getSession();
+        session.setAttribute("user", newUser.getId());
+        session.setAttribute("username", newUser.getUsername());
 
         return "redirect:/events/create";
     }
@@ -131,16 +134,19 @@ public class UserController {
 
 
         setUserInSession(request.getSession(), theUser);
-        request.setAttribute("user", theUser.getId());
+        HttpSession session = request.getSession();
+        session.setAttribute("user", theUser.getId());
+        session.setAttribute("userName", theUser.getUsername());
+        //System.out.println(theUser.getUsername());
 
 
         return "redirect:/events/create";
     }
 
     @GetMapping("logout")
-    public String logout(HttpServletRequest request){
+    public void logout(HttpServletRequest request){
         request.getSession().invalidate();
-        return "redirect:user/login";
+        //return "user/login";
     }
 
 }

@@ -20,6 +20,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.io.IOException;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.Base64;
 import java.util.Optional;
 
@@ -82,13 +84,13 @@ public class EventController {
 
         Optional optEvent = eventRepository.findById(eventId);
         //Optional optScore = scoreRepository.findById(eventId);
-        Iterable<Scores> optScore = scoreRepository.findAll();
+        ArrayList<Scores> optscores = scoreRepository.findByEventId(eventId);
         if (optEvent.isPresent()) {
             Event event = (Event) optEvent.get();
             model.addAttribute("event", event);
             //if (optScore.isPresent()) {
                 //Scores scores = (Scores) optScore.get(); //needs a way to filter by only event ID, find by checks for the main ID...
-                model.addAttribute("scores", optScore);
+                model.addAttribute("scores", optscores);
             //}
             //TODO - Fix the score display here
             //Right now its pulling all scores from all events, uncommenting and changing optScore to Scores will revert it once we have user and eventID's attached to scores.
@@ -122,15 +124,17 @@ public class EventController {
         HttpSession session = request.getSession();
         Integer attributeInt = (Integer) session.getAttribute("event");
         Integer userId = (Integer) session.getAttribute("user");
+        String userName = (String) session.getAttribute("userName");
         for (Scores score : dto.getScores()) {
             score.setEventId(attributeInt);
             score.setUserId(userId);
+            score.setUserName(userName);
         }
         scoreRepository.saveAll(dto.getScores());
 
         model.addAttribute("scores", scoreRepository.findAll());
 
-        return "events/index"; //Temp redirect to index.
+        return "redirect:/events/index"; //Temp redirect to index.
     }
 
     @GetMapping("scoreboard")
