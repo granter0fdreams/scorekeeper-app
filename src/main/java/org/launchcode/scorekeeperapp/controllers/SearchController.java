@@ -33,7 +33,7 @@ public class SearchController {
         return "search";
     }
 
-    @PostMapping({"results"})
+    @GetMapping({"results"})
     public String displaySearchResults(Model model, @RequestParam String searchCategory) {
         Event eventInst = new Event();
         ArrayList<Event> tournaments = new ArrayList<>();
