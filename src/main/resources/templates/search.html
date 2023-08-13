@@ -33,6 +33,19 @@
 
     <hr />
 
+    <table class="tournament-listing">
+    <tr th:each="tournament : ${tournaments}">
+        <td>
+            <p>
+                Tournament Id:
+                <a th:href="@{'/view/' + ${tournament.id}}" th:text="${tournament.id}"></a>
+            </p>
+            <p th:text="${'Name: ' + tournament.name}"></p>
+
+        </td>
+    </tr>
+    </table>
+
 </div>
 
 
