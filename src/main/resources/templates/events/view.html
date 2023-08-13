@@ -15,16 +15,15 @@
 <table class="table table-striped">
     <thead>
     <tr>
-        <th>Hole</th>
-        <th>Score</th>
         <th>Player</th>
+        <th>Score</th>
     </tr>
 
     </thead>
-    <tr th:each="score : ${scores}">
-        <td th:text="${score.position}"></td>
-        <td th:text="${score.score}"></td>
-        <td th:text="${score.userName}"></td>
+    <tr th:each="score : ${scoreMap}">
+        <td th:text="${score.key}"></td>
+        <td th:text="${score.value}"></td>
+<!--        <td th:text="${score.userName}"></td>-->
     </tr>
 </table>
 <!--TODO - Fix score display, see EventController displayViewEventPage-->

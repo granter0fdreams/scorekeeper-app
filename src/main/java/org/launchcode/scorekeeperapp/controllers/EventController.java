@@ -23,6 +23,7 @@ import java.io.IOException;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Base64;
+import java.util.HashMap;
 import java.util.Optional;
 
 import static org.springframework.web.util.WebUtils.setSessionAttribute;
@@ -85,12 +86,20 @@ public class EventController {
         Optional optEvent = eventRepository.findById(eventId);
         //Optional optScore = scoreRepository.findById(eventId);
         ArrayList<Scores> optscores = scoreRepository.findByEventId(eventId);
+        HashMap<String, Integer> scoreMap = new HashMap<>();
+        for (Scores score : optscores) {
+            if (scoreMap.containsKey(score.getUserName())) {
+                scoreMap.put(score.getUserName(), scoreMap.get(score.getUserName()) + score.getScore());
+            } else
+            scoreMap.put(score.getUserName(), score.getScore());
+        }
         if (optEvent.isPresent()) {
             Event event = (Event) optEvent.get();
             model.addAttribute("event", event);
             //if (optScore.isPresent()) {
                 //Scores scores = (Scores) optScore.get(); //needs a way to filter by only event ID, find by checks for the main ID...
                 model.addAttribute("scores", optscores);
+                model.addAttribute("scoreMap", scoreMap);
             //}
             //TODO - Fix the score display here
             //Right now its pulling all scores from all events, uncommenting and changing optScore to Scores will revert it once we have user and eventID's attached to scores.
