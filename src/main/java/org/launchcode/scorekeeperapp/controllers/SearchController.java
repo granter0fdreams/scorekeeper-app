@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Controller
-@RequestMapping({"search"})
+@RequestMapping("search")
 public class SearchController {
 
     private List<Event> events = new ArrayList<>();
@@ -27,20 +27,20 @@ public class SearchController {
 
     }
 
-        @RequestMapping({""})
-        public String searchByIdOrName(Model model) {
+    @RequestMapping("")
+    public String searchByIdOrName(Model model) {
         model.addAttribute("categories", ListController.searchChoices);
         return "search";
     }
 
-    @PostMapping({"results"})
-    public String displaySearchResults(Model model, @RequestParam String searchCategory) {
+    @PostMapping("results")
+    public String displaySearchResults(Model model, @RequestParam String searchCategory, @RequestParam String searchTerm) {
         Event eventInst = new Event();
         ArrayList<Event> tournaments = new ArrayList<>();
         if (searchCategory.equals("tournamentName")) {
-            tournaments = TournamentData.findTournamentByName(searchCategory, this.eventRepository.findAll());
+            tournaments = TournamentData.findTournamentByName(searchTerm, this.eventRepository.findAll());
         } else if (searchCategory.equals("tournamentId")) {
-            tournaments = TournamentData.findTournamentById(eventInst.getId(), this.eventRepository.findAll());
+            tournaments = TournamentData.findTournamentById(Integer.parseInt(searchTerm), this.eventRepository.findAll());
         }
 
         model.addAttribute("categories", ListController.searchChoices);
