@@ -77,8 +77,26 @@ public class UserController {
         User newUser = new User(registerFormDTO.getUsername(), registerFormDTO.getEmail(),registerFormDTO.getPassword());
         userRepository.save(newUser);
         setUserInSession(request.getSession(), newUser);
+        HttpSession session = request.getSession();
+        session.setAttribute("user", newUser.getId());
+        session.setAttribute("username", newUser.getUsername());
 
         return "redirect:/events/create";
+    }
+
+    @GetMapping("join")
+    public String displayJoinPage(Model model){
+        model.addAttribute("title", "Please select an event to join.");
+    return "user/join";
+    }
+
+    @GetMapping("register")
+    public String displayRegisterForm() {
+        return "user/register";
+    }
+    @PostMapping("register")
+    public String sendUserToEventIndex() {
+        return "redirect:events/index";
     }
 
     @GetMapping("login")
@@ -114,15 +132,21 @@ public class UserController {
             return "user/login";
         }
 
+
         setUserInSession(request.getSession(), theUser);
+        HttpSession session = request.getSession();
+        session.setAttribute("user", theUser.getId());
+        session.setAttribute("userName", theUser.getUsername());
+        //System.out.println(theUser.getUsername());
+
 
         return "redirect:/events/create";
     }
 
     @GetMapping("logout")
-    public String logout(HttpServletRequest request){
+    public void logout(HttpServletRequest request){
         request.getSession().invalidate();
-        return "redirect:user/login";
+        //return "user/login";
     }
 
 }
