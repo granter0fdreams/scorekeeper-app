@@ -10,6 +10,16 @@ public class Scores extends AbstractEntity{
         private Integer position;
         private Integer score;
 
+        public String getUserName() {
+                return userName;
+        }
+
+        public void setUserName(String userName) {
+                this.userName = userName;
+        }
+
+        private String userName;
+
         public Scores (Integer userId, Integer eventId, Integer position, Integer score){
             this.userId = userId;
             this.eventId = eventId;

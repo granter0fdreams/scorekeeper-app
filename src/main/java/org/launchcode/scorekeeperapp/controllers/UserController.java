@@ -41,21 +41,21 @@ public class UserController {
         session.setAttribute(userSessionKey, user.getId());
     }
 
-    @GetMapping("host")
+    @GetMapping("register")
     public String displayRegistrationForm(Model model) {
         model.addAttribute(new RegisterFormDTO());
         model.addAttribute("user", "Register");
-        return "user/host";
+        return "user/register";
     }
 
-    @PostMapping("host")
+    @PostMapping("register")
     public String processRegistrationForm(@ModelAttribute @Valid RegisterFormDTO registerFormDTO,
                                           Errors errors, HttpServletRequest request,
                                           Model model) {
 
         if (errors.hasErrors()) {
             model.addAttribute("user", "Register");
-            return "user/host";
+            return "user/register";
         }
 
         User existingUser = userRepository.findByUsername(registerFormDTO.getUsername());
@@ -63,7 +63,7 @@ public class UserController {
         if (existingUser != null) {
             errors.rejectValue("username", "username.alreadyexists", "A user with that username already exists");
             model.addAttribute("user", "Register");
-            return "user/host";
+            return "user/register";
         }
 
         String password = registerFormDTO.getPassword();
@@ -71,14 +71,23 @@ public class UserController {
         if (!password.equals(verifyPassword)) {
             errors.rejectValue("password", "passwords.mismatch", "Passwords do not match");
             model.addAttribute("user", "Register");
-            return "user/host";
+            return "user/register";
         }
 
         User newUser = new User(registerFormDTO.getUsername(), registerFormDTO.getEmail(),registerFormDTO.getPassword());
         userRepository.save(newUser);
         setUserInSession(request.getSession(), newUser);
+        HttpSession session = request.getSession();
+        session.setAttribute("user", newUser.getId());
+        session.setAttribute("username", newUser.getUsername());
 
-        return "redirect:/events/create";
+        return "redirect:/user/selectHostOrJoin";
+    }
+
+    @GetMapping("selectHostOrJoin")
+    public String displayDashboardPage(Model model){
+        model.addAttribute("title", "Please select host or join.");
+        return "user/selectHostOrJoin";
     }
 
     @GetMapping("login")
@@ -114,9 +123,15 @@ public class UserController {
             return "user/login";
         }
 
-        setUserInSession(request.getSession(), theUser);
 
-        return "redirect:/events/create";
+        setUserInSession(request.getSession(), theUser);
+        HttpSession session = request.getSession();
+        session.setAttribute("user", theUser.getId());
+        session.setAttribute("userName", theUser.getUsername());
+        //System.out.println(theUser.getUsername());
+
+
+        return "redirect:/user/selectHostOrJoin";
     }
 
     @GetMapping("logout")

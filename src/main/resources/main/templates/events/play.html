@@ -3,6 +3,7 @@
 <head th:replace="fragments :: head"></head>
 <body>
 <header th:replace="fragments :: page-header"></header>
+<!--<span th:text="${event.getId()}"></span>-->
 <form action="#" th:action="@{/events/save}" th:object="${form}"
       method="post">
     <fieldset>
