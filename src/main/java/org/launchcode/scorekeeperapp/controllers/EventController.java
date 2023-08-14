@@ -21,10 +21,7 @@ import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.io.IOException;
 import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.Base64;
-import java.util.HashMap;
-import java.util.Optional;
+import java.util.*;
 
 import static org.springframework.web.util.WebUtils.setSessionAttribute;
 
@@ -93,13 +90,33 @@ public class EventController {
             } else
             scoreMap.put(score.getUserName(), score.getScore());
         }
+
+        // Create a list from elements of HashMap
+        List<Map.Entry<String, Integer> > list =
+                new LinkedList<Map.Entry<String, Integer> >(scoreMap.entrySet());
+
+        // Sort the list
+        Collections.sort(list, new Comparator<Map.Entry<String, Integer> >() {
+            public int compare(Map.Entry<String, Integer> o1,
+                               Map.Entry<String, Integer> o2)
+            {
+                return (o1.getValue()).compareTo(o2.getValue());
+            }
+        });
+
+        // put data from sorted list to hashmap
+        HashMap<String, Integer> sortedScoreMap = new LinkedHashMap<String, Integer>();
+        for (Map.Entry<String, Integer> aa : list) {
+            sortedScoreMap.put(aa.getKey(), aa.getValue());
+        }
+
         if (optEvent.isPresent()) {
             Event event = (Event) optEvent.get();
             model.addAttribute("event", event);
             //if (optScore.isPresent()) {
                 //Scores scores = (Scores) optScore.get(); //needs a way to filter by only event ID, find by checks for the main ID...
                 model.addAttribute("scores", optscores);
-                model.addAttribute("scoreMap", scoreMap);
+                model.addAttribute("scoreMap", sortedScoreMap);
             //}
             //TODO - Fix the score display here
             //Right now its pulling all scores from all events, uncommenting and changing optScore to Scores will revert it once we have user and eventID's attached to scores.
