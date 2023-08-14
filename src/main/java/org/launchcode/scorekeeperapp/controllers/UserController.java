@@ -41,21 +41,21 @@ public class UserController {
         session.setAttribute(userSessionKey, user.getId());
     }
 
-    @GetMapping("host")
+    @GetMapping("register")
     public String displayRegistrationForm(Model model) {
         model.addAttribute(new RegisterFormDTO());
         model.addAttribute("user", "Register");
-        return "user/host";
+        return "user/register";
     }
 
-    @PostMapping("host")
+    @PostMapping("register")
     public String processRegistrationForm(@ModelAttribute @Valid RegisterFormDTO registerFormDTO,
                                           Errors errors, HttpServletRequest request,
                                           Model model) {
 
         if (errors.hasErrors()) {
             model.addAttribute("user", "Register");
-            return "user/host";
+            return "user/register";
         }
 
         User existingUser = userRepository.findByUsername(registerFormDTO.getUsername());
@@ -63,7 +63,7 @@ public class UserController {
         if (existingUser != null) {
             errors.rejectValue("username", "username.alreadyexists", "A user with that username already exists");
             model.addAttribute("user", "Register");
-            return "user/host";
+            return "user/register";
         }
 
         String password = registerFormDTO.getPassword();
@@ -71,7 +71,7 @@ public class UserController {
         if (!password.equals(verifyPassword)) {
             errors.rejectValue("password", "passwords.mismatch", "Passwords do not match");
             model.addAttribute("user", "Register");
-            return "user/host";
+            return "user/register";
         }
 
         User newUser = new User(registerFormDTO.getUsername(), registerFormDTO.getEmail(),registerFormDTO.getPassword());
@@ -81,54 +81,13 @@ public class UserController {
         session.setAttribute("user", newUser.getId());
         session.setAttribute("username", newUser.getUsername());
 
-        return "redirect:/events/create";
+        return "redirect:/user/selectHostOrJoin";
     }
 
-    @GetMapping("join")
-    public String displayJoinPage(Model model){
-        model.addAttribute("title", "Please select an event to join.");
-        return "user/join";
-    }
-
-    @GetMapping("registerToPlay")
-    public String displayRegisterToPlayForm(Model model) {
-        model.addAttribute(new RegisterFormDTO());
-        model.addAttribute("user", "Register");
-        return "user/registerToPlay";
-    }
-    @PostMapping("registertoplay")
-    public String sendUserToEventIndex(@ModelAttribute @Valid RegisterFormDTO registerFormDTO,
-                                       Errors errors, HttpServletRequest request,
-                                       Model model) {
-        if (errors.hasErrors()) {
-            model.addAttribute("user", "Register");
-            return "user/registerToPlay";
-        }
-
-        User existingUser = userRepository.findByUsername(registerFormDTO.getUsername());
-
-        if (existingUser != null) {
-            errors.rejectValue("username", "username.alreadyexists", "A user with that username already exists");
-            model.addAttribute("user", "Register");
-            return "user/registerToPlay";
-        }
-
-        String password = registerFormDTO.getPassword();
-        String verifyPassword = registerFormDTO.getVerifyPassword();
-        if (!password.equals(verifyPassword)) {
-            errors.rejectValue("password", "passwords.mismatch", "Passwords do not match");
-            model.addAttribute("user", "Register");
-            return "user/registerToPlay";
-        }
-
-        User newUser = new User(registerFormDTO.getUsername(), registerFormDTO.getEmail(),registerFormDTO.getPassword());
-        userRepository.save(newUser);
-        setUserInSession(request.getSession(), newUser);
-        HttpSession session = request.getSession();
-        session.setAttribute("user", newUser.getId());
-        session.setAttribute("username", newUser.getUsername());
-
-        return "redirect:events/index";
+    @GetMapping("selectHostOrJoin")
+    public String displayDashboardPage(Model model){
+        model.addAttribute("title", "Please select host or join.");
+        return "user/selectHostOrJoin";
     }
 
     @GetMapping("login")
@@ -172,51 +131,7 @@ public class UserController {
         //System.out.println(theUser.getUsername());
 
 
-        return "redirect:/events/create";
-    }
-
-    @GetMapping("loginToPlay")
-    public String displayLoginToPlayForm(Model model) {
-        model.addAttribute("loginFormDTO", new LoginFormDTO());
-        model.addAttribute("user", "Log In");
-        return "user/loginToPlay";
-    }
-
-    @PostMapping("loginToPlay")
-    public String processLoginToPlayForm(@ModelAttribute @Valid LoginFormDTO loginFormDTO,
-                                         Errors errors, HttpServletRequest request,
-                                         Model model) {
-
-        if (errors.hasErrors()) {
-            model.addAttribute("user", "Log In");
-            return "user/loginToPlay";
-        }
-
-        User theUser = userRepository.findByUsername(loginFormDTO.getUsername());
-
-        if (theUser == null) {
-            errors.rejectValue("username", "user.invalid", "The given username does not exist");
-            model.addAttribute("user", "Log In");
-            return "user/loginToPlay";
-        }
-
-        String password = loginFormDTO.getPassword();
-
-        if (!theUser.isMatchingPassword(password)) {
-            errors.rejectValue("password", "password.invalid", "Invalid password");
-            model.addAttribute("user", "Log In");
-            return "user/loginToPlay";
-        }
-
-
-        setUserInSession(request.getSession(), theUser);
-        HttpSession session = request.getSession();
-        session.setAttribute("user", theUser.getId());
-        session.setAttribute("userName", theUser.getUsername());
-        //System.out.println(theUser.getUsername());
-
-
-        return "redirect:/events/index";
+        return "redirect:/user/selectHostOrJoin";
     }
 
     @GetMapping("logout")
