@@ -87,15 +87,47 @@ public class UserController {
     @GetMapping("join")
     public String displayJoinPage(Model model){
         model.addAttribute("title", "Please select an event to join.");
-    return "user/join";
+        return "user/join";
     }
 
-    @GetMapping("register")
-    public String displayRegisterForm() {
-        return "user/register";
+    @GetMapping("registerToPlay")
+    public String displayRegisterToPlayForm(Model model) {
+        model.addAttribute(new RegisterFormDTO());
+        model.addAttribute("user", "Register");
+        return "user/registerToPlay";
     }
-    @PostMapping("register")
-    public String sendUserToEventIndex() {
+    @PostMapping("registertoplay")
+    public String sendUserToEventIndex(@ModelAttribute @Valid RegisterFormDTO registerFormDTO,
+                                       Errors errors, HttpServletRequest request,
+                                       Model model) {
+        if (errors.hasErrors()) {
+            model.addAttribute("user", "Register");
+            return "user/registerToPlay";
+        }
+
+        User existingUser = userRepository.findByUsername(registerFormDTO.getUsername());
+
+        if (existingUser != null) {
+            errors.rejectValue("username", "username.alreadyexists", "A user with that username already exists");
+            model.addAttribute("user", "Register");
+            return "user/registerToPlay";
+        }
+
+        String password = registerFormDTO.getPassword();
+        String verifyPassword = registerFormDTO.getVerifyPassword();
+        if (!password.equals(verifyPassword)) {
+            errors.rejectValue("password", "passwords.mismatch", "Passwords do not match");
+            model.addAttribute("user", "Register");
+            return "user/registerToPlay";
+        }
+
+        User newUser = new User(registerFormDTO.getUsername(), registerFormDTO.getEmail(),registerFormDTO.getPassword());
+        userRepository.save(newUser);
+        setUserInSession(request.getSession(), newUser);
+        HttpSession session = request.getSession();
+        session.setAttribute("user", newUser.getId());
+        session.setAttribute("username", newUser.getUsername());
+
         return "redirect:events/index";
     }
 
@@ -143,10 +175,54 @@ public class UserController {
         return "redirect:/events/create";
     }
 
+    @GetMapping("loginToPlay")
+    public String displayLoginToPlayForm(Model model) {
+        model.addAttribute("loginFormDTO", new LoginFormDTO());
+        model.addAttribute("user", "Log In");
+        return "user/loginToPlay";
+    }
+
+    @PostMapping("loginToPlay")
+    public String processLoginToPlayForm(@ModelAttribute @Valid LoginFormDTO loginFormDTO,
+                                         Errors errors, HttpServletRequest request,
+                                         Model model) {
+
+        if (errors.hasErrors()) {
+            model.addAttribute("user", "Log In");
+            return "user/loginToPlay";
+        }
+
+        User theUser = userRepository.findByUsername(loginFormDTO.getUsername());
+
+        if (theUser == null) {
+            errors.rejectValue("username", "user.invalid", "The given username does not exist");
+            model.addAttribute("user", "Log In");
+            return "user/loginToPlay";
+        }
+
+        String password = loginFormDTO.getPassword();
+
+        if (!theUser.isMatchingPassword(password)) {
+            errors.rejectValue("password", "password.invalid", "Invalid password");
+            model.addAttribute("user", "Log In");
+            return "user/loginToPlay";
+        }
+
+
+        setUserInSession(request.getSession(), theUser);
+        HttpSession session = request.getSession();
+        session.setAttribute("user", theUser.getId());
+        session.setAttribute("userName", theUser.getUsername());
+        //System.out.println(theUser.getUsername());
+
+
+        return "redirect:/events/index";
+    }
+
     @GetMapping("logout")
-    public void logout(HttpServletRequest request){
+    public String logout(HttpServletRequest request){
         request.getSession().invalidate();
-        //return "user/login";
+        return "redirect:user/login";
     }
 
 }
