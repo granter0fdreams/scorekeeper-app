@@ -9,7 +9,7 @@
 
   <title th:text="'Scorekeeper' + ${title == null ? '' : ' :: ' + title}">Scorekeeper</title>
 </head>
-
+<body>
 <header th:fragment="page-header" class="navbar navbar-inverse navbar-fixed-top bs-docs-nav" role="banner">
   <div class="container">
     <div class="navbar-header">
@@ -35,19 +35,18 @@
           </ul>
         </li>
         <li>
-          <a href="@{/events/create}">Create a Tournament</a>
+          <a th:href="@{/events/create}">Create a Tournament</a>
         </li>
         <li>
           <a th:href="@{/scoreboard}">Scores</a>
         </li>
         <li class="active">
-          <a href="#">Contact</a>
+          <a th:href="@{/user/logout}">Logout</a>
         </li>
       </ul>
     </nav>
   </div>
 </header>
-<body>
 <div th:fragment="page-header"></div>
 
 <p th:fragment = ""></p>
