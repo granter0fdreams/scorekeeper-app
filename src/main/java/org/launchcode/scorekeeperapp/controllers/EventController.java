@@ -66,7 +66,7 @@ public class EventController {
     }
 
     @GetMapping("{eventId}")
-    public String displayViewEventPage(Model model, @PathVariable int eventId) {
+    public String displayViewEventPage(Model model, @PathVariable int eventId, HttpServletRequest request) {
         String eventLink="https://localhost:8080/events/"+eventId;
         byte[] image = new byte[0];
         try{
@@ -79,6 +79,8 @@ public class EventController {
         model.addAttribute("eventLink",eventLink);
         model.addAttribute("qrcode",qrcode);
 
+        HttpSession session = request.getSession();
+        session.setAttribute("event", eventId);
 
         Optional optEvent = eventRepository.findById(eventId);
         //Optional optScore = scoreRepository.findById(eventId);
