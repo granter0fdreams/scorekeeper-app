@@ -143,7 +143,7 @@ public class EventController {
 
         model.addAttribute("scores", scoreRepository.findAll());
 
-        return "redirect:/events/index"; //Temp redirect to index.
+        return "redirect:/events/scoreboard"; //Temp redirect to index.
     }
 
     @GetMapping("scoreboard")
