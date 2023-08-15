@@ -21,10 +21,7 @@ import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.io.IOException;
 import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.Base64;
-import java.util.HashMap;
-import java.util.Optional;
+import java.util.*;
 
 import static org.springframework.web.util.WebUtils.setSessionAttribute;
 
@@ -69,7 +66,7 @@ public class EventController {
     }
 
     @GetMapping("{eventId}")
-    public String displayViewEventPage(Model model, @PathVariable int eventId) {
+    public String displayViewEventPage(Model model, @PathVariable int eventId, HttpServletRequest request) {
         String eventLink="https://localhost:8080/events/"+eventId;
         byte[] image = new byte[0];
         try{
@@ -82,6 +79,8 @@ public class EventController {
         model.addAttribute("eventLink",eventLink);
         model.addAttribute("qrcode",qrcode);
 
+        HttpSession session = request.getSession();
+        session.setAttribute("event", eventId);
 
         Optional optEvent = eventRepository.findById(eventId);
         //Optional optScore = scoreRepository.findById(eventId);
@@ -93,15 +92,34 @@ public class EventController {
             } else
             scoreMap.put(score.getUserName(), score.getScore());
         }
+
+        // Create a list from elements of HashMap
+        List<Map.Entry<String, Integer> > list =
+                new LinkedList<Map.Entry<String, Integer> >(scoreMap.entrySet());
+
+        // Sort the list
+        Collections.sort(list, new Comparator<Map.Entry<String, Integer> >() {
+            public int compare(Map.Entry<String, Integer> o1,
+                               Map.Entry<String, Integer> o2)
+            {
+                return (o1.getValue()).compareTo(o2.getValue());
+            }
+        });
+
+        // put data from sorted list to hashmap
+        HashMap<String, Integer> sortedScoreMap = new LinkedHashMap<String, Integer>();
+        for (Map.Entry<String, Integer> aa : list) {
+            sortedScoreMap.put(aa.getKey(), aa.getValue());
+        }
+
         if (optEvent.isPresent()) {
             Event event = (Event) optEvent.get();
             model.addAttribute("event", event);
             //if (optScore.isPresent()) {
                 //Scores scores = (Scores) optScore.get(); //needs a way to filter by only event ID, find by checks for the main ID...
                 model.addAttribute("scores", optscores);
-                model.addAttribute("scoreMap", scoreMap);
+                model.addAttribute("scoreMap", sortedScoreMap);
             //}
-            //TODO - Fix the score display here
             //Right now its pulling all scores from all events, uncommenting and changing optScore to Scores will revert it once we have user and eventID's attached to scores.
             return "events/view";
         } else {
@@ -134,6 +152,7 @@ public class EventController {
         Integer attributeInt = (Integer) session.getAttribute("event");
         Integer userId = (Integer) session.getAttribute("user");
         String userName = (String) session.getAttribute("userName");
+        Integer event = (Integer) session.getAttribute("event");
         for (Scores score : dto.getScores()) {
             score.setEventId(attributeInt);
             score.setUserId(userId);
@@ -143,7 +162,7 @@ public class EventController {
 
         model.addAttribute("scores", scoreRepository.findAll());
 
-        return "redirect:/events/scoreboard"; //Temp redirect to index.
+        return "redirect:/events/"+event; //Temp redirect to index.
     }
 
     @GetMapping("scoreboard")
