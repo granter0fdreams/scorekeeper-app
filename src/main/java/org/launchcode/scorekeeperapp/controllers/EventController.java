@@ -10,17 +10,23 @@ import org.launchcode.scorekeeperapp.models.data.ScoreRepository;
 import org.launchcode.scorekeeperapp.models.data.UserRepository;
 import org.launchcode.scorekeeperapp.models.dto.userEventScoreDTO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.io.IOException;
-import java.util.Base64;
-import java.util.Optional;
+import java.lang.reflect.Array;
+import java.util.*;
+
+import static org.springframework.web.util.WebUtils.setSessionAttribute;
 
 @Controller
+@Scope("session")
 @RequestMapping("events")
 public class EventController {
     @Autowired
@@ -36,17 +42,23 @@ public class EventController {
     }
 
     @PostMapping("create")
-    public String processCreateEventForm(@ModelAttribute @Valid Event event, Errors errors, Model model){
+    public String processCreateEventForm(@ModelAttribute @Valid Event event, Errors errors, Model model, HttpServletRequest request){
         if (errors.hasErrors()){
             model.addAttribute(new Event());
             model.addAttribute("title","Create Event");
             return "events/create";
         }
+       // userEventScoreDTO uesdto = new userEventScoreDTO();
+       // model.addAttribute("form", uesdto);
+
         eventRepository.save(event);
-        return "events/create";
+        HttpSession session = request.getSession();
+        session.setAttribute("event", event.getId());
+        //System.out.println("Event ID: " + event.getId());
+        return "redirect:/events/play";
     }
 
-    @GetMapping("index")
+    @GetMapping("/index")
     public String displayAllEvents(Model model){
         model.addAttribute("title","All Events");
         model.addAttribute("events",eventRepository.findAll());
@@ -54,7 +66,7 @@ public class EventController {
     }
 
     @GetMapping("{eventId}")
-    public String displayViewEventPage(Model model, @PathVariable int eventId) {
+    public String displayViewEventPage(Model model, @PathVariable int eventId, HttpServletRequest request) {
         String eventLink="https://localhost:8080/events/"+eventId;
         byte[] image = new byte[0];
         try{
@@ -67,16 +79,46 @@ public class EventController {
         model.addAttribute("eventLink",eventLink);
         model.addAttribute("qrcode",qrcode);
 
+        HttpSession session = request.getSession();
+        session.setAttribute("event", eventId);
 
         Optional optEvent = eventRepository.findById(eventId);
         //Optional optScore = scoreRepository.findById(eventId);
-        Iterable<Scores> optScore = scoreRepository.findAll();
+        ArrayList<Scores> optscores = scoreRepository.findByEventId(eventId);
+        HashMap<String, Integer> scoreMap = new HashMap<>();
+        for (Scores score : optscores) {
+            if (scoreMap.containsKey(score.getUserName())) {
+                scoreMap.put(score.getUserName(), scoreMap.get(score.getUserName()) + score.getScore());
+            } else
+            scoreMap.put(score.getUserName(), score.getScore());
+        }
+
+        // Create a list from elements of HashMap
+        List<Map.Entry<String, Integer> > list =
+                new LinkedList<Map.Entry<String, Integer> >(scoreMap.entrySet());
+
+        // Sort the list
+        Collections.sort(list, new Comparator<Map.Entry<String, Integer> >() {
+            public int compare(Map.Entry<String, Integer> o1,
+                               Map.Entry<String, Integer> o2)
+            {
+                return (o1.getValue()).compareTo(o2.getValue());
+            }
+        });
+
+        // put data from sorted list to hashmap
+        HashMap<String, Integer> sortedScoreMap = new LinkedHashMap<String, Integer>();
+        for (Map.Entry<String, Integer> aa : list) {
+            sortedScoreMap.put(aa.getKey(), aa.getValue());
+        }
+
         if (optEvent.isPresent()) {
             Event event = (Event) optEvent.get();
             model.addAttribute("event", event);
             //if (optScore.isPresent()) {
                 //Scores scores = (Scores) optScore.get(); //needs a way to filter by only event ID, find by checks for the main ID...
-                model.addAttribute("scores", optScore);
+                model.addAttribute("scores", optscores);
+                model.addAttribute("scoreMap", sortedScoreMap);
             //}
             //TODO - Fix the score display here
             //Right now its pulling all scores from all events, uncommenting and changing optScore to Scores will revert it once we have user and eventID's attached to scores.
@@ -89,23 +131,52 @@ public class EventController {
 
 
     @GetMapping("/play")
-    public String showCreateForm(Model model) {
+    public String showCreateForm(Model model, HttpServletRequest request) {
         userEventScoreDTO uesdto = new userEventScoreDTO();
+        HttpSession session = request.getSession();
+        Integer attributeInt = (Integer) session.getAttribute("event");
+        Event newEvent = eventRepository.findById(attributeInt).orElse(null);
 
-        for (int i = 1; i <= 9; i++) {
-            uesdto.addScore(new Scores());
+        for (int i = 1; i <= newEvent.getHoles(); i++) {
+            Scores score = new Scores();
+            uesdto.addScore(score);
         }
+        model.addAttribute("title", "Play Event ${session.getAttribute('event'}");
         model.addAttribute("form", uesdto);
         return "events/play";
     }
 
     @PostMapping("save")
-    public String saveScores(@ModelAttribute userEventScoreDTO dto, Model model) {
+    public String saveScores(@ModelAttribute userEventScoreDTO dto, Model model, HttpServletRequest request) {
+
+        HttpSession session = request.getSession();
+        Integer attributeInt = (Integer) session.getAttribute("event");
+        Integer userId = (Integer) session.getAttribute("user");
+        String userName = (String) session.getAttribute("userName");
+        for (Scores score : dto.getScores()) {
+            score.setEventId(attributeInt);
+            score.setUserId(userId);
+            score.setUserName(userName);
+        }
         scoreRepository.saveAll(dto.getScores());
 
         model.addAttribute("scores", scoreRepository.findAll());
-        return "events/index"; //Temp redirect to index.
+
+        return "redirect:/events/scoreboard"; //Temp redirect to index.
     }
+
+    @GetMapping("scoreboard")
+    public String displaySingleEventScores(Model model){
+        model.addAttribute("title","Event Scores");
+        return "events/scoreboard";
+    }
+
+//    @GetMapping("scoreboard")
+//    public String displaySingleEventScores(@RequestParam Integer eventId, Model model){
+//        model.addAttribute("title","Event Scores");
+//        model.addAttribute("scores",scoreRepository.findById(eventId));
+//        return "events/scoreboard";
+//    }
 
 
 }
