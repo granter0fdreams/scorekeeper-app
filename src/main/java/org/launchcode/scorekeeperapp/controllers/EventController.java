@@ -120,7 +120,6 @@ public class EventController {
                 model.addAttribute("scores", optscores);
                 model.addAttribute("scoreMap", sortedScoreMap);
             //}
-            //TODO - Fix the score display here
             //Right now its pulling all scores from all events, uncommenting and changing optScore to Scores will revert it once we have user and eventID's attached to scores.
             return "events/view";
         } else {
@@ -153,6 +152,7 @@ public class EventController {
         Integer attributeInt = (Integer) session.getAttribute("event");
         Integer userId = (Integer) session.getAttribute("user");
         String userName = (String) session.getAttribute("userName");
+        Integer event = (Integer) session.getAttribute("event");
         for (Scores score : dto.getScores()) {
             score.setEventId(attributeInt);
             score.setUserId(userId);
@@ -162,7 +162,7 @@ public class EventController {
 
         model.addAttribute("scores", scoreRepository.findAll());
 
-        return "redirect:/events/scoreboard"; //Temp redirect to index.
+        return "redirect:/events/"+event; //Temp redirect to index.
     }
 
     @GetMapping("scoreboard")
