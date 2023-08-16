@@ -46,6 +46,25 @@ public class TournamentData {
         return results;
     }
 
+    public static ArrayList<User> findUserByUsername(String username, Iterable<User> allUsers){
+
+        String username1 = username.toLowerCase();
+
+        ArrayList<User> results = new ArrayList<>();
+
+        for (User user : allUsers) {
+
+            if (user.getUsername().toLowerCase().contains(username1)) {
+
+                results.add(user);
+            }
+
+        }
+
+        return results;
+
+    }
+
     public static ArrayList<Event> findTournamentById(int tournamentId, Iterable<Event> allTournaments) {
 
         Event eventInst = new Event();

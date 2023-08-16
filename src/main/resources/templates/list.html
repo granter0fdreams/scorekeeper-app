@@ -13,13 +13,7 @@
         <th>Tournament ID</th>
         <th>Tournament Name</th>
     </tr>
-
     <tr>
-        <td>
-            <li>
-                <a th:href="@{/list/tournaments(category='All',value='View All')}"></a>
-            </li>
-        </td>
         <td>
             <li th:each="eventId : ${tournaments}">
                 <a th:href="@{/list/tournaments(category=eventId,value=${eventId.id})}" th:text="${eventId.id}"></a>

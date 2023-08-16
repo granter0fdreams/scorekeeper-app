@@ -2,7 +2,9 @@ package org.launchcode.scorekeeperapp.controllers;
 
 import org.launchcode.scorekeeperapp.models.Event;
 import org.launchcode.scorekeeperapp.models.TournamentData;
+import org.launchcode.scorekeeperapp.models.User;
 import org.launchcode.scorekeeperapp.models.data.EventRepository;
+import org.launchcode.scorekeeperapp.models.data.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,6 +25,9 @@ public class SearchController {
     @Autowired
     private EventRepository eventRepository;
 
+    @Autowired
+    private UserRepository userRepository;
+
     public SearchController() {
 
     }
@@ -36,15 +41,20 @@ public class SearchController {
     @PostMapping("results")
     public String displaySearchResults(Model model, @RequestParam String searchCategory, @RequestParam String searchTerm) {
         Event eventInst = new Event();
+        User userInst = new User();
         ArrayList<Event> tournaments = new ArrayList<>();
+        ArrayList<User> users = new ArrayList<>();
         if (searchCategory.equals("tournamentName")) {
             tournaments = TournamentData.findTournamentByName(searchTerm, this.eventRepository.findAll());
-        } else if (searchCategory.equals("tournamentId")) {
-            tournaments = TournamentData.findTournamentById(Integer.parseInt(searchTerm), this.eventRepository.findAll());
+        } else if (searchCategory.equals("username")) {
+            users = TournamentData.findUserByUsername(searchTerm, this.userRepository.findAll());
+        } else {
+            System.out.println("No results found");
         }
 
         model.addAttribute("categories", ListController.searchChoices);
         model.addAttribute("tournaments", tournaments);
+        model.addAttribute("users", users);
         return "search";
     }
 }

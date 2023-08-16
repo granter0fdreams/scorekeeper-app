@@ -14,6 +14,7 @@ import java.util.HashMap;
 import java.util.List;
 
 @Controller
+@RequestMapping("list")
 public class ListController {
 
         @Autowired
@@ -21,9 +22,8 @@ public class ListController {
         static HashMap<String, String> searchChoices = new HashMap<>();
 
     public ListController() {
-        searchChoices.put("all", "All");
         searchChoices.put("tournamentName", "Tournament Name");
-        searchChoices.put("eventId", "Tournament Id");
+        searchChoices.put("username", "Username");
     }
 
     @RequestMapping({""})
@@ -33,17 +33,17 @@ public class ListController {
         return "list";
     }
 
-    @RequestMapping({"tournaments"})
-    public String listTournamentsByNameAndId(Model model, @RequestParam String category, @RequestParam String value) {
-        List<Event> tournaments = new ArrayList<>();
-        if (category.equals("tournamentName")) {
-            tournaments = TournamentData.findTournamentByName(value, this.eventRepository.findAll());
-            model.addAttribute("title", "Tournament Results");
-        } else if (category.equals("eventId")){
-            tournaments = TournamentData.findByTypeAndValue(category, value, this.eventRepository.findAll());
-            model.addAttribute("title", "Tournament Results");
-        }
-        model.addAttribute("tournaments", tournaments);
-        return "list-tournaments";
-    }
+//    @RequestMapping({"tournaments"})
+//    public String listTournamentsByNameAndId(Model model, @RequestParam String category, @RequestParam String value) {
+//        List<Event> tournaments = new ArrayList<>();
+//        if (category.equals("tournamentName")) {
+//            tournaments = TournamentData.findTournamentByName(value, this.eventRepository.findAll());
+//            model.addAttribute("title", "Tournament Results");
+//        } else if (category.equals("eventId")){
+//            tournaments = TournamentData.findByTypeAndValue(category, value, this.eventRepository.findAll());
+//            model.addAttribute("title", "Tournament Results");
+//        }
+//        model.addAttribute("tournaments", tournaments);
+//        return "list-tournaments";
+//    }
     }

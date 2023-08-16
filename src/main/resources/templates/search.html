@@ -17,7 +17,7 @@
                         name="searchCategory"
                         th:id="${category.key}"
                         th:value="${category.key}"
-                        th:checked="${category.key == 'all'}"/>
+                        th:checked="${category.key == 'tournamentName'}"/>
                 <label th:for="${category.key}" th:text="${category.value}"></label>
             </span>
 
@@ -44,6 +44,19 @@
 
         </td>
     </tr>
+    </table>
+
+    <table class="user-listing">
+
+        <tr th:each="user : ${users}">
+            <td>
+                <p>
+                    Username:
+                    <a th:href="@{'/user-listing/' + ${user.username}}" th:text="${user.username}"></a>
+                </p>
+            </td>
+        </tr>
+
     </table>
 
 </div>
