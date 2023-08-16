@@ -1,9 +1,13 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th = "http://www.thymeleaf.org/">
-<head>
-  <meta charset="UTF-8">
-  <link href="../static/css/styles.css" th:href="@{/css/styles.css}" rel="stylesheet" />
-  <title>Fragments</title>
+<head th:fragment="head">
+
+  <!-- Bootstrap stylesheets and script -->
+  <link th:href="@{/css/bootstrap.css}" rel="stylesheet" />
+  <link th:href="@{/css/techjobs.css}" rel="stylesheet" />
+  <script type="text/javascript" th:src="@{/js/bootstrap.js}"></script>
+
+  <title th:text="'Scorekeeper' + ${title == null ? '' : ' :: ' + title}">Scorekeeper</title>
 </head>
 <body>
 <p th:fragment = ""></p>
