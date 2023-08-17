@@ -21,9 +21,9 @@
             </tr>
             </thead>
             <tbody>
-            <tr th:each="score, itemStat : *{scores}">
-                <td><input th:field="*{scores[__${itemStat.index}__].position}" /></td>
-                <td><input th:field="*{scores[__${itemStat.index}__].score}" /></td>
+            <tr th:each="score, iterStat : *{scores}">
+                <td position="*{scores[__${iterStat.index}__].position}" th:text="${iterStat.count}"/></td>
+                <td><input th:field="*{scores[__${iterStat.index}__].score}" /></td>
             </tr>
             </tbody>
         </table>
