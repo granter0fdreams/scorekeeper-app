@@ -2,11 +2,38 @@ div h1 {
 height: 900px;
 width: 900px;
 }
+h1{
+font-size: 45px;
+text-align: center;
+}
 
 html{
 max-width: 100%;
 background-image: url("../images/golf_ball_and_tee.jpg");
 background-repeat: no-repeat;
 background-size: cover;
+
+}
+
+.form-group{
+text-align: center;
+font-size: 25px;
+flex-direction: column;
+}
+
+.btn-primary{
+    font-size: large;
+    margin: 650px;
+    margin-top: 85px;
+    margin-bottom: 85px;
+    border-radius: 10px;
+
+}
+
+.existing{
+    margin-inline-start: 40%;
+    border-radius: 10px;
+ font-size: large;
+
 
 }

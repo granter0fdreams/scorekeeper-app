@@ -3,9 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <!--  <link href="../static/css/styles.css" th:href="@{/css/styles.css}" rel="stylesheet" />-->
+  <link href="../static/css/join.css" th:href="@{/css/join.css}" rel="stylesheet">
+
   <title>User Login</title>
 </head>
-<body>
+<body class="container">
 <h1>Login</h1>
 <form method="post" th:action="@{/user/login}">
   <div class="form-group">
@@ -24,6 +26,9 @@
   <input type="submit" class="btn btn-primary" value="Log In" />
 </form>
 
-<p>Don't have an account? <a href="register">Create An Account.</a></p>
+<p class="no-acct">Don't have an account? <a href="register">
+  <button class="create-acct">Create An Account.</button>
+</a>
+</p>
 </body>
 </html>

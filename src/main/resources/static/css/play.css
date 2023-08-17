@@ -4,7 +4,21 @@ width: 900px;
 }
 
 html{
-background-image: url("./images/golf_ball_and_tee.jpg");
+max-width: 100%;
+background-image: url("../images/golf-scorecard.jpg");
 background-repeat: no-repeat;
+background-size: cover;
+}
 
+form{
+margin-left: 30%;
+font-size: 35px;
+align-content: center;
+display: inline-flex;
+flex-wrap: no-wrap;
+background-color: rgb(212 216 227 /.70);
+}
+
+fieldset input {
+font-size: 20px;
 }

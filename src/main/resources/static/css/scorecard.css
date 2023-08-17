@@ -1,10 +1,9 @@
 
 
-
-
-
 html{
-background-image: url("./images/scorecard.jpg");
+max-width: 100%;
+background-image: url("../images/scorecard.jpg");
 background-repeat: no-repeat;
+background-size: cover;
 
 }
