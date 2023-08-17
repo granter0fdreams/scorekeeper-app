@@ -17,7 +17,7 @@ h1{
 text-align: center;
 }
 html{
-
+max-width: 100%;
 background-image: url("../images/golf_ball_and_club.jpg");
 background-repeat: no-repeat;
 background-size: cover;
