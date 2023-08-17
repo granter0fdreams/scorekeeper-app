@@ -8,7 +8,7 @@ width: 900px;
 display: flex;
 flex-direction: column;
 
-background-color: rgb(255 186 51 /.70);
+background-color: rgb(218 165 32 /.75);
 
 }
 
@@ -18,8 +18,9 @@ text-align: center;
 }
 html{
 
-background-image: url("../images/Animated Golf ball with club green.jpg");
-
+background-image: url("../images/golf_ball_and_club.jpg");
+background-repeat: no-repeat;
+background-size: cover;
 
 
 }
@@ -27,7 +28,7 @@ background-image: url("../images/Animated Golf ball with club green.jpg");
 
 .form-group{
 text-align: center;
-font-size: 25px;
+font-size: 30px;
 flex-direction: column;
 }
 
@@ -40,7 +41,7 @@ flex-direction: column;
 
 }
 .no-acct{
-font-size: 20px;
+font-size: 30px;
 }
 
 .create-acct{
