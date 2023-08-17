@@ -86,12 +86,18 @@ public class EventController {
         //Optional optScore = scoreRepository.findById(eventId);
         ArrayList<Scores> optscores = scoreRepository.findByEventId(eventId);
         HashMap<String, Integer> scoreMap = new HashMap<>();
-        for (Scores score : optscores) {
-            if (scoreMap.containsKey(score.getUserName())) {
-                scoreMap.put(score.getUserName(), scoreMap.get(score.getUserName()) + score.getScore());
-            } else
-            scoreMap.put(score.getUserName(), score.getScore());
+        try {
+            for (Scores score : optscores) {
+//                if (scoreMap.containsKey(score.getUserName())) {
+//                    scoreMap.put(score.getUserName(), scoreMap.get(score.getUserName()) + score.getScore());
+//                } else
+                    scoreMap.put(score.getUserName(), score.getScore());
+            }
+        } catch(Exception e) {
+            return "redirect:../";
         }
+
+
 
         // Create a list from elements of HashMap
         List<Map.Entry<String, Integer> > list =
