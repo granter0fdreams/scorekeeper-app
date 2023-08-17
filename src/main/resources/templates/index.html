@@ -4,8 +4,17 @@
 <body>
 <header th:replace="fragments :: header"></header>
 <h1> Welcome to ScoreKeeper</h1>
-<a href="user/register">Create An Account</a>
-<a href="user/login">Login to an existing account.</a>
+
+<div class="register">
+  <a href="user/register">
+      <button>Create An Account</button>
+  </a>
+</div>
+<div class="login">
+  <a href="user/login">
+      <button>Login to an existing account</button>
+  </a>
+</div>
 </body>
 </html>
 <!-- created an index page that will allow client to see both options -->

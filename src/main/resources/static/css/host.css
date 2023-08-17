@@ -1,0 +1,12 @@
+div h1 {
+height: 900px;
+width: 900px;
+}
+
+html{
+max-width: 100%;
+background-image: url("../images/golf_ball_and_tee.jpg");
+background-repeat: no-repeat;
+background-size: cover;
+
+}
