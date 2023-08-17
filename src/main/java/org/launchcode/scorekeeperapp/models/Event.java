@@ -13,10 +13,7 @@ public class Event extends AbstractEntity{
     @Positive
     @Digits(integer = 5, fraction = 0, message = "Please enter an integer larger than 0.")
     private Integer holes;
-
-
-    //@ManyToMany
-    //private final List<User> user = new ArrayList<>();
+    private boolean closed = false;
 
     public String getName() {
         return name;
@@ -39,4 +36,12 @@ public class Event extends AbstractEntity{
         this.holes = holes;
     }
     public Event(){}
+
+    public boolean isClosed() {
+        return closed;
+    }
+
+    public void setClosed(boolean closed) {
+        this.closed = closed;
+    }
 }

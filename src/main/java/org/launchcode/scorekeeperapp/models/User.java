@@ -18,9 +18,6 @@ public class User extends AbstractEntity{
     @Email
     private String email;
 
-//    @NotBlank
-//    @Size(min = 6, message = "Password must be at least 6 characters long")
-//    private String password;
 
     private boolean isLoggedIn = false;
 
@@ -28,9 +25,6 @@ public class User extends AbstractEntity{
         return email;
     }
 
-//    public void setEmail(String email) {
-//        this.email = email;
-//    }
 
     public boolean isLoggedIn() {
         return isLoggedIn;
