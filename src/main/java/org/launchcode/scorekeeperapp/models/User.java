@@ -11,9 +11,6 @@ import java.util.Objects;
 @Entity
 public class User extends AbstractEntity{
 
-//    @OneToMany
-//    private List<User> user = new ArrayList<>();
-
     private static final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
     @NotNull
     private String pwHash;
@@ -49,13 +46,7 @@ public class User extends AbstractEntity{
         this.email = email;
         this.pwHash = encoder.encode(password);
     }
-//    public List<User> getUser() {
-//        return user;
-//    }
-////
-//    public void setJobs(List<User> user) {
-//        this.user = user;
-//    }
+
     public String getUsername() {
         return username;
     }
@@ -72,8 +63,5 @@ public class User extends AbstractEntity{
         return encoder.matches(password, pwHash);
     }
 
-//    public void setUser(List<User> user) {
-//        this.user = user;
-//    }
 
 }
