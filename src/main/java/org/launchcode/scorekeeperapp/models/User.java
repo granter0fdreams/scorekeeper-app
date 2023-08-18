@@ -1,13 +1,12 @@
 package org.launchcode.scorekeeperapp.models;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 public class User extends AbstractEntity{
@@ -16,6 +15,8 @@ public class User extends AbstractEntity{
     @JoinColumn(name = "userId")
     private List<User> user = new ArrayList<>();
 
+    @Id
+    @GeneratedValue
     private Integer userId;
 
     private static final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
@@ -86,5 +87,19 @@ public class User extends AbstractEntity{
 
     public void setUserId(Integer userId) {
         this.userId = userId;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        User user = (User) o;
+        return Objects.equals(userId, user.userId);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), userId);
     }
 }

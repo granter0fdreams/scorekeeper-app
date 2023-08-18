@@ -1,13 +1,11 @@
 package org.launchcode.scorekeeperapp.models;
 
-import javax.persistence.Entity;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.Positive;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 public class Event extends AbstractEntity{
@@ -18,6 +16,8 @@ public class Event extends AbstractEntity{
     @ManyToMany
     private List<Scores> scores = new ArrayList<>();
 
+    @Id
+    @GeneratedValue
     private Integer eventId;
     private String eventName;
 
@@ -84,5 +84,20 @@ public class Event extends AbstractEntity{
     public void setEventId(Integer eventId) {
         this.eventId = eventId;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        Event event = (Event) o;
+        return Objects.equals(eventId, event.eventId);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), eventId);
+    }
+
 }
 
