@@ -12,12 +12,7 @@ import java.util.Objects;
 public class User extends AbstractEntity{
 
     @OneToMany
-    @JoinColumn(name = "userId")
     private List<User> user = new ArrayList<>();
-
-    @Id
-    @GeneratedValue
-    private Integer userId;
 
     private static final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
     @NotNull
@@ -49,7 +44,7 @@ public class User extends AbstractEntity{
     }
 
     public User(String username, String email, String password) {
-        super();
+//        super();
         this.username = username;
         this.email = email;
         this.pwHash = encoder.encode(password);
@@ -81,25 +76,4 @@ public class User extends AbstractEntity{
         this.user = user;
     }
 
-    public Integer getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Integer userId) {
-        this.userId = userId;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        if (!super.equals(o)) return false;
-        User user = (User) o;
-        return Objects.equals(userId, user.userId);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(super.hashCode(), userId);
-    }
 }

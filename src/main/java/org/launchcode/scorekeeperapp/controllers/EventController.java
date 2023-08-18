@@ -152,8 +152,8 @@ public class EventController {
         Integer userId = (Integer) session.getAttribute("user");
         String userName = (String) session.getAttribute("userName");
         for (Scores score : dto.getScores()) {
-            score.getEvent().setEventId(eventId);
-            score.getUser().setUserId(userId);
+            score.getEvent().getId();
+            score.getUser().getId();
             score.getUser().setUsername(userName);
         }
         scoreRepository.saveAll(dto.getScores());
