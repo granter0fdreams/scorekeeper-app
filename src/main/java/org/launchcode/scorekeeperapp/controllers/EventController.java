@@ -84,10 +84,10 @@ public class EventController {
         ArrayList<Scores> optscores = scoreRepository.findByEventId(eventId);
         HashMap<String, Integer> scoreMap = new HashMap<>();
         for (Scores score : optscores) {
-            if (scoreMap.containsKey(score.getUserName())) {
-                scoreMap.put(score.getUserName(), scoreMap.get(score.getUserName()) + score.getScore());
+            if (scoreMap.containsKey(score.getUser().getUsername())) {
+                scoreMap.put(score.getUser().getUsername(), scoreMap.get(score.getUser().getUsername()) + score.getScore());
             } else
-            scoreMap.put(score.getUserName(), score.getScore());
+            scoreMap.put(score.getUser().getUsername(), score.getScore());
         }
 
         // Create a list from elements of HashMap
@@ -153,9 +153,9 @@ public class EventController {
         String userName = (String) session.getAttribute("userName");
         Integer event = (Integer) session.getAttribute("event");
         for (Scores score : dto.getScores()) {
-            score.setEventId(attributeInt);
-            score.setUserId(userId);
-            score.setUserName(userName);
+            score.getEvent().setEventId(attributeInt);
+            score.getUser().setUserId(userId);
+            score.getUser().setUsername(userName);
         }
         scoreRepository.saveAll(dto.getScores());
 
