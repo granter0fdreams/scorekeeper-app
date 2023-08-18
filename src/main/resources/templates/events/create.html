@@ -6,12 +6,12 @@
 <body>
 <form method = 'post' th:action="@{/events/create}">
     <div>
-        <input th:field="${event.name}"
+        <input th:field="${event.eventName}"
                type="text"
                class="form-control"
                id = "inputName"
                placeholder = 'Pick an event name'/>
-        <p th:errors="${event.name}" class="error"></p>
+        <p th:errors="${event.eventName}" class="error"></p>
     </div>
 
     <div>

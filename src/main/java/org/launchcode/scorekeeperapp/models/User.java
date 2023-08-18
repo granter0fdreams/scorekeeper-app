@@ -13,7 +13,7 @@ import java.util.List;
 public class User extends AbstractEntity{
 
     @OneToMany
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "userId")
     private List<User> user = new ArrayList<>();
 
     private Integer userId;

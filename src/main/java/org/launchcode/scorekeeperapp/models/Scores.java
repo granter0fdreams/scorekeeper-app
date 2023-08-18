@@ -16,7 +16,7 @@ public class Scores extends AbstractEntity{
 //        private Integer eventId;
         @ManyToOne
         private User user;
-        @ManyToMany
+        @ManyToOne
         private Event event;
         private Integer position;
         private Integer score;
