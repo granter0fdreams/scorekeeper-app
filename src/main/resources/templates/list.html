@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="https://www.thymeleaf.org/">
 <head th:replace="fragments :: head"></head>
 <body>
-
+<header th:replace="fragments :: header"></header>
 <div class="container body-content">
     <h1 th:text="${#strings.capitalizeWords(title)}"></h1>
     <h2 class = "centered">View Tournaments by Category</h2>
@@ -16,12 +16,12 @@
     <tr>
         <td>
             <li th:each="eventId : ${tournaments}">
-                <a th:href="@{/list/tournaments(category=eventId,value=${eventId.id})}" th:text="${eventId.id}"></a>
+                <a th:href="@{'/events/' + ${eventId.id}}" th:text="${eventId.id}"></a>
             </li>
         </td>
         <td>
             <li th:each="tournamentName : ${tournaments}">
-                <a th:href="@{/list/tournaments(category=tournamentName,value=${tournamentName.name})}" th:text="${tournamentName.name}"></a>
+                <a class="disabled" th:text="${tournamentName.name}"></a>
             </li>
         </td>
     </tr>
