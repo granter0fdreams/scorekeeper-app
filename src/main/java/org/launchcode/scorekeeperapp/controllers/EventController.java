@@ -148,12 +148,11 @@ public class EventController {
     public String saveScores(@ModelAttribute userEventScoreDTO dto, Model model, HttpServletRequest request) {
 
         HttpSession session = request.getSession();
-        Integer attributeInt = (Integer) session.getAttribute("event");
+        Integer eventId = (Integer) session.getAttribute("event");
         Integer userId = (Integer) session.getAttribute("user");
         String userName = (String) session.getAttribute("userName");
-        Integer event = (Integer) session.getAttribute("event");
         for (Scores score : dto.getScores()) {
-            score.getEvent().setEventId(attributeInt);
+            score.getEvent().setEventId(eventId);
             score.getUser().setUserId(userId);
             score.getUser().setUsername(userName);
         }
@@ -161,7 +160,7 @@ public class EventController {
 
         model.addAttribute("scores", scoreRepository.findAll());
 
-        return "redirect:/events/"+event; //Temp redirect to index.
+        return "redirect:/events/"+eventId; //Temp redirect to index.
     }
 
     @GetMapping("scoreboard")
