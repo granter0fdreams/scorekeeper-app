@@ -9,7 +9,7 @@
 </head>
 <body>
 <header th:fragment="header" class="navbar navbar-expand-lg navbar-inverse navbar-fixed-top bs-docs-nav" role="banner">
-  <div class="container-lg">
+  <div class="container-fluid">
     <div class="navbar-header">
       <button class="navbar-toggle" type="button" data-bs-toggle="collapse" data-bs-target=".bs-navbar-collapse #navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="sr-only">Toggle navigation</span>
@@ -19,27 +19,22 @@
       </button>
       <span class="navbar-brand mb-0 h1">Scorekeeper</span>
     </div>
-    <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation" id="navbarSupportedContent">>
-      <ul class="nav navbar-nav navbar-right navbar-nav me-auto mb-2 mb-lg-">
+    <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation" id="navbarNavDropdown">
+      <ul class="nav navbar-nav navbar-right navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" th:href="@{/user/selectHostOrJoin}">Dashboard</a>
         </li>
-        <li class="nav-item dropdown">
-          <a href="#" class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Search<b class="caret"></b></a>
-          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" th:href="@{/search}">Tournament</a></li>
-            <li><a class="dropdown-item" th:href="@{/search}">User</a></li>
-          </ul>
+        <li class="nav-item">
+          <a class="nav-link" th:href="@{/search}">Search</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link active" th:href="@{/events/create}">Create a Tournament</a>
+          <a class="nav-link" th:href="@{/events/create}">Create a Tournament</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link active" th:href="@{/events/scoreboard}">Scores</a>
+          <a class="nav-link" th:href="@{/events/scoreboard}">Scores</a>
         </li>
         <li class="nav-item active">
-          <a class="nav-link active" th:href="@{/user/logout}">Logout</a>
+          <a class="nav-link" th:href="@{/user/logout}">Logout</a>
         </li>
       </ul>
     </nav>
