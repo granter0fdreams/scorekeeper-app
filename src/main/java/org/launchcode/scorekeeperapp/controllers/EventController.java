@@ -151,17 +151,18 @@ public class EventController {
         Integer eventId = (Integer) session.getAttribute("event");
         Integer userId = (Integer) session.getAttribute("user");
         String userName = (String) session.getAttribute("userName");
-        for (Scores score : dto.getScores()) {
-            score.getEvent().getId();
-            score.getUser().getId();
-            score.getUser().setUsername(userName);
-        }
-        scoreRepository.saveAll(dto.getScores());
+            for (Scores score : dto.getScores()) {
+                score.getEvent().getId();
+                score.getUser().getId();
+                score.getUser().setUsername(userName);
 
-        model.addAttribute("scores", scoreRepository.findAll());
+                scoreRepository.saveAll(dto.getScores());
 
+                model.addAttribute("scores", scoreRepository.findAll());
+            }
         return "redirect:/events/"+eventId; //Temp redirect to index.
     }
+
 
     @GetMapping("scoreboard")
     public String displaySingleEventScores(Model model){
