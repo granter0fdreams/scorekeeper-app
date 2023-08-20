@@ -14,7 +14,7 @@
 
         <td>
             <li th:each="event : ${events}">
-                <a th:href="@{/events/{id}(id=${event.id})}" th:text="${event.name}"></a>
+                <a th:href="@{/events/{id}(id=${event.id})}" th:text="${event.eventName}"></a>
             </li>
         </td>
 </table>
