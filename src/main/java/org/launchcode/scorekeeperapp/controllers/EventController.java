@@ -33,6 +33,8 @@ public class EventController {
     private EventRepository eventRepository;
     @Autowired
     private ScoreRepository scoreRepository;
+    @Autowired
+    private UserRepository userRepository;
 
     @GetMapping("create")
     public String displayCreateEventForm(Model model){
@@ -52,7 +54,7 @@ public class EventController {
         eventRepository.save(event);
         HttpSession session = request.getSession();
         session.setAttribute("event", event.getId());
-        //System.out.println("Event ID: " + event.getId());
+        System.out.println("Event ID: " + event.getId());
         return "redirect:/events/play";
     }
 
@@ -150,17 +152,25 @@ public class EventController {
         HttpSession session = request.getSession();
         Integer eventId = (Integer) session.getAttribute("event");
         Integer userId = (Integer) session.getAttribute("user");
-        String userName = (String) session.getAttribute("userName");
+
+        try{
+            Event event= eventRepository.findById(eventId).orElse(null);
+            User user = userRepository.findById(userId).orElse(null);
             for (Scores score : dto.getScores()) {
-                score.getId();
-                score.getEvent().getId();
-                score.getUser().getId();
-                score.getUser().setUsername(userName);
-
-                scoreRepository.saveAll(dto.getScores());
-
-                model.addAttribute("scores", scoreRepository.findAll());
+                score.setUser(user);
+                score.setEvent(event);
             }
+        } catch (Exception e) {
+            System.out.println("Error saving scores");
+        }
+        for (Scores score : dto.getScores()) {
+            if (score.getScore() == null) {
+                score.setScore(0);
+            }
+        }
+        scoreRepository.saveAll(dto.getScores());
+        model.addAttribute("scores", scoreRepository.findAll());
+
         return "redirect:/events/"+eventId; //Temp redirect to index.
     }
 
