@@ -35,7 +35,7 @@ public class TournamentData {
 
         for (Event tournamentName : allTournaments) {
 
-            if (tournamentName.getName().toLowerCase().contains(lower_val)) {
+            if (tournamentName.getEventName().toLowerCase().contains(lower_val)) {
                 results.add(tournamentName);
             } else {
                 System.out.println("No results found");
