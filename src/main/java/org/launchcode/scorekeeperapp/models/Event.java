@@ -2,6 +2,7 @@ package org.launchcode.scorekeeperapp.models;
 
 import javax.persistence.*;
 import javax.validation.constraints.Digits;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,39 +12,45 @@ import java.util.Objects;
 public class Event extends AbstractEntity{
 
     @ManyToOne
+    @JoinColumn(name = "user_id")
     private User user;
 
     @ManyToMany
     private List<Scores> scores = new ArrayList<>();
 
+    @NotNull
     private String eventName;
 
-    @Positive
-    @Digits(integer = 5, fraction = 0, message = "Please enter an integer larger than 0.")
-    private Integer holes;
+    @NotNull
+    private Integer numberOfHoles;
     public Event(){}
-    public Event(User user, List<Scores> scores, String eventName, Integer holes) {
+    public Event(User user, List<Scores> scores, String eventName, Integer numberOfHoles) {
         super();
         this.user = user;
         this.scores = scores;
         this.eventName = eventName;
-        this.holes = holes;
+        this.numberOfHoles = numberOfHoles;
+    }
+
+    public Event(String eventName, Integer numberOfHoles) {
+        this.eventName = eventName;
+        this.numberOfHoles = numberOfHoles;
     }
 
     public String getEventName() {
         return eventName;
     }
 
-    public void setEventName(String name) {
+    public void setEventName(String eventName) {
         this.eventName = eventName;
     }
 
-    public Integer getHoles() {
-        return holes;
+    public Integer getNumberOfHoles() {
+        return numberOfHoles;
     }
 
-    public void setHoles(Integer holes) {
-        this.holes = holes;
+    public void setNumberOfHoles(Integer numberOfHoles){
+        this.numberOfHoles = numberOfHoles;
     }
 
 
