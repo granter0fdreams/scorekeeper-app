@@ -1,6 +1,11 @@
 package org.launchcode.scorekeeperapp.controllers;
 
+import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
+import org.launchcode.scorekeeperapp.models.Event;
+import org.launchcode.scorekeeperapp.models.Scores;
+import org.launchcode.scorekeeperapp.models.TournamentData;
 import org.launchcode.scorekeeperapp.models.User;
+import org.launchcode.scorekeeperapp.models.data.ScoreRepository;
 import org.launchcode.scorekeeperapp.models.data.UserRepository;
 import org.launchcode.scorekeeperapp.models.dto.LoginFormDTO;
 import org.launchcode.scorekeeperapp.models.dto.RegisterFormDTO;
@@ -13,13 +18,16 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
-import java.util.Optional;
+import java.util.*;
 
 @Controller
 @RequestMapping("user")
 public class UserController {
     @Autowired
     UserRepository userRepository;
+
+    @Autowired
+    private ScoreRepository scoreRepository;
     private static final String userSessionKey = "user";
 
     public User getUserFromSession(HttpSession session) {
@@ -133,6 +141,8 @@ public class UserController {
 
         return "redirect:/user/selectHostOrJoin";
     }
+
+
 
     @GetMapping("logout")
     public String logout(HttpServletRequest request){

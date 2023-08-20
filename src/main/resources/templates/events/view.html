@@ -23,12 +23,10 @@
     <tr th:each="score : ${scoreMap}">
         <td th:text="${score.key}"></td>
         <td th:text="${score.value}"></td>
-<!--        <td th:text="${score.userName}"></td>-->
     </tr>
 </table>
-<!--TODO - Fix score display, see EventController displayViewEventPage-->
-
-
-
+<form th:action="@{/events/{eventId}(eventId=${event.id})}" th:object="${event}" method="post">
+    <button type="submit">Close Tournament</button>
+</form>
 </body>
 </html>
