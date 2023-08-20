@@ -34,7 +34,7 @@ public class Event extends AbstractEntity{
         return eventName;
     }
 
-    public void setEventName(String name) {
+    public void setEventName(String eventName) {
         this.eventName = eventName;
     }
 
