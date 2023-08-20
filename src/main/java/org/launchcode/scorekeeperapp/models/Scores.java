@@ -12,8 +12,6 @@ public class Scores extends AbstractEntity{
 
         @ManyToMany(mappedBy="scores")
         private final List<Event> events = new ArrayList<>();
-//        private Integer userId;
-//        private Integer eventId;
         @ManyToOne
         private User user;
         @ManyToOne
@@ -51,39 +49,6 @@ public class Scores extends AbstractEntity{
                 this.event = event;
         }
 
-        //        public String getUserName() {
-//                return userName;
-//        }
-
-//        public void setUserName(String userName) {
-//                this.userName = userName;
-//        }
-//
-//        private String userName;
-
-//        public Scores (Integer userId, Integer eventId, Integer position, Integer score){
-//            this.userId = userId;
-//            this.eventId = eventId;
-//            this.position = position;
-//            this.score = score;
-//        }
-//        public Scores(){}
-
-//        public Integer getUserId() {
-//                return userId;
-//        }
-//
-//        public void setUserId(Integer userId) {
-//                this.userId = userId;
-//        }
-//
-//        public Integer getEventId() {
-//                return eventId;
-//        }
-//
-//        public void setEventId(Integer eventId) {
-//                this.eventId = eventId;
-//        }
 
         public Integer getPosition() {
                 return position;
