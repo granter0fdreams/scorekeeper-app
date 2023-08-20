@@ -48,8 +48,6 @@ public class EventController {
             model.addAttribute("title","Create Event");
             return "events/create";
         }
-       // userEventScoreDTO uesdto = new userEventScoreDTO();
-       // model.addAttribute("form", uesdto);
 
         eventRepository.save(event);
         HttpSession session = request.getSession();
@@ -83,14 +81,13 @@ public class EventController {
         session.setAttribute("event", eventId);
 
         Optional optEvent = eventRepository.findById(eventId);
-        //Optional optScore = scoreRepository.findById(eventId);
         ArrayList<Scores> optscores = scoreRepository.findByEventId(eventId);
         HashMap<String, Integer> scoreMap = new HashMap<>();
         for (Scores score : optscores) {
-            if (scoreMap.containsKey(score.getUserName())) {
-                scoreMap.put(score.getUserName(), scoreMap.get(score.getUserName()) + score.getScore());
+            if (scoreMap.containsKey(score.getUser().getUsername())) {
+                scoreMap.put(score.getUser().getUsername(), scoreMap.get(score.getUser().getUsername()) + score.getScore());
             } else
-            scoreMap.put(score.getUserName(), score.getScore());
+            scoreMap.put(score.getUser().getUsername(), score.getScore());
         }
 
         // Create a list from elements of HashMap
@@ -115,11 +112,13 @@ public class EventController {
         if (optEvent.isPresent()) {
             Event event = (Event) optEvent.get();
             model.addAttribute("event", event);
-            //if (optScore.isPresent()) {
-                //Scores scores = (Scores) optScore.get(); //needs a way to filter by only event ID, find by checks for the main ID...
                 model.addAttribute("scores", optscores);
                 model.addAttribute("scoreMap", sortedScoreMap);
-            //}
+
+            // Check if the event is closed
+            boolean isEventClosed = event.isClosed();
+            model.addAttribute("isEventClosed", isEventClosed);
+
             //Right now its pulling all scores from all events, uncommenting and changing optScore to Scores will revert it once we have user and eventID's attached to scores.
             return "events/view";
         } else {
@@ -149,21 +148,22 @@ public class EventController {
     public String saveScores(@ModelAttribute userEventScoreDTO dto, Model model, HttpServletRequest request) {
 
         HttpSession session = request.getSession();
-        Integer attributeInt = (Integer) session.getAttribute("event");
+        Integer eventId = (Integer) session.getAttribute("event");
         Integer userId = (Integer) session.getAttribute("user");
         String userName = (String) session.getAttribute("userName");
-        Integer event = (Integer) session.getAttribute("event");
-        for (Scores score : dto.getScores()) {
-            score.setEventId(attributeInt);
-            score.setUserId(userId);
-            score.setUserName(userName);
-        }
-        scoreRepository.saveAll(dto.getScores());
+            for (Scores score : dto.getScores()) {
+                score.getId();
+                score.getEvent().getId();
+                score.getUser().getId();
+                score.getUser().setUsername(userName);
 
-        model.addAttribute("scores", scoreRepository.findAll());
+                scoreRepository.saveAll(dto.getScores());
 
-        return "redirect:/events/"+event; //Temp redirect to index.
+                model.addAttribute("scores", scoreRepository.findAll());
+            }
+        return "redirect:/events/"+eventId; //Temp redirect to index.
     }
+
 
     @GetMapping("scoreboard")
     public String displaySingleEventScores(Model model){
@@ -171,12 +171,18 @@ public class EventController {
         return "events/scoreboard";
     }
 
-//    @GetMapping("scoreboard")
-//    public String displaySingleEventScores(@RequestParam Integer eventId, Model model){
-//        model.addAttribute("title","Event Scores");
-//        model.addAttribute("scores",scoreRepository.findById(eventId));
-//        return "events/scoreboard";
-//    }
+    @PostMapping("{eventId}")
+    public String closeEvent(@PathVariable int eventId, HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        Optional<Event> optionalEvent = eventRepository.findById(eventId);
+
+        if (optionalEvent.isPresent()) {
+            Event event = optionalEvent.get();
+            event.setClosed(true);
+            eventRepository.save(event);
+        }
+        return "redirect:/user/selectHostOrJoin";
+    }
 
 
 }
