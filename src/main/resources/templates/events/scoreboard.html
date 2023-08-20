@@ -2,9 +2,30 @@
 <html lang="en" xmlns:th="https://www.thymeleaf.org/">
 <head>
     <meta charset="UTF-8"/>
+    <link href="../static/css/scorecard.css" th:href="@{/css/scorecard.css}" rel="stylesheet">
+    <link href="../static/css/chat.css" th:href="@{/css/chat.css}" rel="stylesheet">
+
     <title th:text="${title}">Event Scoreboard</title>
+
 </head>
+
 <body>
 This is where we will see the scoreboard for the event the user just submitted.
+
+
+<!--This is for the chatroom on scoreboard-->
+<div class="chat-container">
+    <div class="chat-box">
+        <div class="message incoming">Hello!</div>
+        <div class="message outgoing">Hi there!</div>
+
+    </div>
+      <div class="input-container">
+          <input type="text" class="input-message" placeholder="Type your message...">
+          <button class="send-button">Send</button>
+      </input></div>
+</div>
+
+
 </body>
 </html>

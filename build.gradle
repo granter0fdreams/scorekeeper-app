@@ -27,6 +27,11 @@ dependencies {
 	implementation 'mysql:mysql-connector-java:8.0.23'
 	implementation 'com.google.zxing:core:3.4.0'
 	implementation 'com.google.zxing:javase:3.4.0'
+	implementation 'org.springframework.boot:spring-boot-starter-websocket'
+	implementation 'org.webjars:stomp-websocket:2.3.3'
+	implementation 'javax.websocket:javax.websocket-api:1.1'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
 }
 
 tasks.named('test') {

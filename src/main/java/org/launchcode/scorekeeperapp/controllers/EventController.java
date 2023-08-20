@@ -4,10 +4,8 @@ import com.google.zxing.WriterException;
 import org.launchcode.scorekeeperapp.models.Event;
 import org.launchcode.scorekeeperapp.models.QRCodeGenerator;
 import org.launchcode.scorekeeperapp.models.Scores;
-import org.launchcode.scorekeeperapp.models.User;
 import org.launchcode.scorekeeperapp.models.data.EventRepository;
 import org.launchcode.scorekeeperapp.models.data.ScoreRepository;
-import org.launchcode.scorekeeperapp.models.data.UserRepository;
 import org.launchcode.scorekeeperapp.models.dto.userEventScoreDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -20,10 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.util.*;
-
-import static org.springframework.web.util.WebUtils.setSessionAttribute;
 
 @Controller
 @Scope("session")
@@ -171,12 +166,17 @@ public class EventController {
         return "events/scoreboard";
     }
 
+
+
+
 //    @GetMapping("scoreboard")
 //    public String displaySingleEventScores(@RequestParam Integer eventId, Model model){
 //        model.addAttribute("title","Event Scores");
 //        model.addAttribute("scores",scoreRepository.findById(eventId));
 //        return "events/scoreboard";
 //    }
+
+
 
 
 }

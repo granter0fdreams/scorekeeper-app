@@ -1,0 +1,31 @@
+body{
+height: 900px;
+width: 900px;
+}
+
+h1{
+font-size: 50px;
+
+}
+
+html{
+max-width: 100%;
+background-image: url("../images/golf ball and hole.jpg");
+background-repeat: no-repeat;
+background-size: cover;
+
+}
+
+.event{
+font-size: large;
+background-color: lightblue;
+border: 5px solid black;
+border-radius: 10px;
+margin: 10px;
+
+}
+
+div {
+font-size: 20px;
+
+}
