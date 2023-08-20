@@ -11,6 +11,9 @@ import java.util.Objects;
 @Entity
 public class User extends AbstractEntity{
 
+    @OneToMany(mappedBy = "user")
+    private List<Event> events = new ArrayList<>();
+
     private static final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
     @NotNull
     private String pwHash;
