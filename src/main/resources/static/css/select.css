@@ -1,0 +1,29 @@
+h1{
+font-weight: bold;
+color: white;
+	font-size: 40px;
+	text-shadow: -1px 1px 0 #000,
+				  1px 1px 0 #000,
+				 1px -1px 0 #000,
+				-1px -1px 0 #000;
+}
+
+
+body{
+max-width: 100%;
+background-image: url("../images/golf ball.jpg");
+background-repeat: no-repeat;
+background-size: cover;
+
+}
+
+.select{
+
+background-color: lightblue;
+font-weight: bold;
+border: 5px solid black;
+border-radius: 10px;
+margin: 10px;
+
+}
+

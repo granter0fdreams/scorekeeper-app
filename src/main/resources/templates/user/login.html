@@ -1,5 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th = "http://www.thymeleaf.org/">
+<link href="../static/css/login.css" th:href="@{/css/login.css}" rel="stylesheet">
+
 <head>
   <meta charset="UTF-8">
   <!--  <link href="../static/css/styles.css" th:href="@{/css/styles.css}" rel="stylesheet" />-->
@@ -24,6 +26,6 @@
   <input type="submit" class="btn btn-primary" value="Log In" />
 </form>
 
-<p>Don't have an account? <a href="register">Create An Account.</a></p>
+<p>Don't have an account? <a href="register"><button class="create-acct">Create An Account.</button></a></p>
 </body>
 </html>
