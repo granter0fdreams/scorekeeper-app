@@ -1,22 +1,23 @@
-.welcome {
-
-height: 900px;
-width: 900px;
+h1{
+font-weight: bold;
 }
+
 
 body{
 max-width: 100%;
-background-image: url("../images/golf_ball_and_club.jpg");
+background-image: url("../images/golf ball.jpg");
 background-repeat: no-repeat;
 background-size: cover;
 
 }
 
-button{
-font-weight: bold;
+.select{
+
 background-color: lightblue;
+font-weight: bold;
 border: 5px solid black;
 border-radius: 10px;
 margin: 10px;
 
 }
+
