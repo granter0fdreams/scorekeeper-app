@@ -34,8 +34,8 @@ public class TournamentData {
         ArrayList<Event> results = new ArrayList<>();
 
         for (Event tournamentName : allTournaments) {
-
-            if (tournamentName.getEventName().toLowerCase().contains(lower_val)) {
+            String eventName = tournamentName.getEventName();
+            if (eventName != null && eventName.toLowerCase().contains(lower_val)) {
                 results.add(tournamentName);
             } else {
                 System.out.println("No results found");
@@ -76,9 +76,6 @@ public class TournamentData {
             if (intValue(eventInst.getId()) == intValue(tournamentId)) {
                 results.add(event);
             }
-
-            return results;
-
         }
         return results;
     }
