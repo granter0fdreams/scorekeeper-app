@@ -1,9 +1,10 @@
 .welcome {
+
 height: 900px;
 width: 900px;
 }
 
-html{
+body{
 max-width: 100%;
 background-image: url("../images/golf_ball_and_club.jpg");
 background-repeat: no-repeat;
@@ -12,8 +13,8 @@ background-size: cover;
 }
 
 button{
-
-background-color: green;
+font-weight: bold;
+background-color: lightblue;
 border: 5px solid black;
 border-radius: 10px;
 margin: 10px;

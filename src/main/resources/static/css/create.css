@@ -3,12 +3,9 @@ height: 900px;
 width: 900px;
 }
 
-h1{
-font-size: 50px;
 
-}
 
-html{
+body{
 max-width: 100%;
 background-image: url("../images/golf ball and hole.jpg");
 background-repeat: no-repeat;
@@ -16,7 +13,7 @@ background-size: cover;
 
 }
 
-.event{
+.submit-btn{
 font-size: large;
 background-color: lightblue;
 border: 5px solid black;
@@ -26,6 +23,12 @@ margin: 10px;
 }
 
 div {
+
 font-size: 20px;
 
+
+}
+
+div label{
+font-weight: bold ;
 }

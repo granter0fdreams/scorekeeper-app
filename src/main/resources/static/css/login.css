@@ -1,0 +1,33 @@
+body{
+max-width: 100%;
+background-image: url("../images/golf_ball_and_club.jpg");
+background-repeat: no-repeat;
+background-size: cover;
+
+}
+.form-group{
+    font-size: large;
+    font-weight: bold;
+}
+.btn-primary{
+    font-size: large;
+    font-weight: bold;
+    background-color: lightblue;
+    border: 5px solid black;
+    border-radius: 10px;
+    margin: 10px;
+}
+
+p{
+    font-weight: bold;
+    font-size: large;
+}
+.create-acct{
+    font-size: large;
+    font-weight: bold;
+    background-color: lightblue;
+    border: 5px solid black;
+    border-radius: 10px;
+    margin: 10px;
+
+}

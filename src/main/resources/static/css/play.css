@@ -3,22 +3,38 @@ height: 900px;
 width: 900px;
 }
 
-html{
-max-width: 100%;
-background-image: url("../images/golf-scorecard.jpg");
-background-repeat: no-repeat;
-background-size: cover;
+body{
+    max-width: 100%;
+    background-image: url("../images/golf-scorecard.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 form{
-margin-left: 30%;
-font-size: 35px;
-align-content: center;
-display: inline-flex;
-flex-wrap: no-wrap;
-background-color: rgb(212 216 227 /.70);
+    margin-left: 30%;
+    font-size: 35px;
+    align-content: center;
+    display: inline-flex;
+    flex-wrap: no-wrap;
+    background-color: rgb(212 216 227 /.70);
+}
+#submitButton{
+
+    font-weight: bold;
+    background-color: lightblue;
+    border: 5px solid black;
+    border-radius: 10px;
+    margin: 10px;
 }
 
+#resetButton{
+    font-weight: bold;
+    background-color: lightblue;
+    border: 5px solid black;
+    border-radius: 10px;
+    margin: 10px;
+
+}
 fieldset input {
 font-size: 20px;
 }

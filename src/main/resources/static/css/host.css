@@ -16,21 +16,26 @@ background-size: cover;
 }
 
 .form-group{
+font-weight: bold;
 text-align: center;
 font-size: 25px;
 flex-direction: column;
 }
 
 .btn-primary{
+    margin-inline-start: 40%;
+    font-weight: bold;
     font-size: large;
-    margin: 650px;
-    margin-top: 85px;
-    margin-bottom: 85px;
+    background-color: lightblue;
+    margin-top: 15px;
+    margin-bottom: 15px;
     border-radius: 10px;
 
 }
 
-.existing{
+.existing-acct{
+    font-weight: bold;
+    background-color: lightblue;
     margin-inline-start: 40%;
     border-radius: 10px;
  font-size: large;
