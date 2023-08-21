@@ -1,4 +1,16 @@
+const WebSocket = require('ws');
 const socket = new WebSocket("ws://localhost:8080");
+WebSocket.Server({httpServer, localhost:8080}):
+const db = require('./UserRepository');
+
+const clients = new Map();
+server.on('connection', client => {
+    const userName = authenticateUser(client);
+
+    if(userName) {
+        clients.set(userName, client);
+    }
+})
 
 socket.addEventListener("open", event => {
     console.log("Websocket connection opened");

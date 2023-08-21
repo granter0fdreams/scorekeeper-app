@@ -1,3 +1,5 @@
+package org.launchcode.scorekeeperapp.controllers;
+
 import javax.websocket.*;
 import java.net.URI;
 
