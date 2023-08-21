@@ -4,6 +4,7 @@
     <title>Create an event</title>
 </head>
 <body>
+<header th:replace="fragments :: header"></header>
 <form method = 'post' th:action="@{/events/create}">
     <div>
         <input th:field="${event.eventName}"

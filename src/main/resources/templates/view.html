@@ -2,6 +2,7 @@
 <html lang="en" xmlns:th="https://www.thymeleaf.org/">
 <head th:replace="fragments :: head"></head>
 <body>
+<header th:replace="fragments :: header"></header>
 <div class="tournament-listing">
     <p th:text="${'ID: ' + tournament.id}"></p>
     <p th:text="${'Name: ' + tournament.name}"></p>

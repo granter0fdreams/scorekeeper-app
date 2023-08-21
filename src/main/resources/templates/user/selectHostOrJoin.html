@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th = "http://www.thymeleaf.org/">
-<head>
-    <meta charset="UTF-8">
-    <link href="../static/css/styles.css" th:href="@{/css/styles.css}" rel="stylesheet" />
+<head th:insert="fragments :: head">
     <title>Dashboard</title>
 </head>
 <body>
+<header th:replace="fragments :: header"></header>
 <h1>Welcome to Your Dashboard</h1>
 
 <a href="/events/create">Host A Tournament</a>
