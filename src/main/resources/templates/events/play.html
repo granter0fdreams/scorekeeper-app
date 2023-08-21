@@ -1,12 +1,8 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="https://www.thymeleaf.org/" xmlns="http://www.w3.org/1999/html">
-<head>
-    <meta charset="UTF-8"/>
-    <link href="../static/css/play.css" th:href="@{/css/play.css}" rel="stylesheet">
-
-    <title>Add Auto Generated Event Info Here</title>
-</head>
+<head th:insert="fragments :: head"></head>
 <body>
+<!--<header th:replace="fragments :: header"></header>-->
 <!--<span th:text="${event.getId()}"></span>-->
 <form action="#" th:action="@{/events/save}" th:object="${form}"
       method="post">

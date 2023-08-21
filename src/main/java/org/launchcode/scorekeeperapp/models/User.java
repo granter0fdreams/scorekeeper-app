@@ -1,9 +1,12 @@
 package org.launchcode.scorekeeperapp.models;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-import javax.persistence.Entity;
+import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
 @Entity
 public class User extends AbstractEntity{
@@ -18,9 +21,6 @@ public class User extends AbstractEntity{
     @Email
     private String email;
 
-//    @NotBlank
-//    @Size(min = 6, message = "Password must be at least 6 characters long")
-//    private String password;
 
     private boolean isLoggedIn = false;
 
@@ -28,9 +28,6 @@ public class User extends AbstractEntity{
         return email;
     }
 
-//    public void setEmail(String email) {
-//        this.email = email;
-//    }
 
     public boolean isLoggedIn() {
         return isLoggedIn;
@@ -44,6 +41,7 @@ public class User extends AbstractEntity{
     }
 
     public User(String username, String email, String password) {
+        super();
         this.username = username;
         this.email = email;
         this.pwHash = encoder.encode(password);
@@ -52,6 +50,11 @@ public class User extends AbstractEntity{
     public String getUsername() {
         return username;
     }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
     public void setPassword(String password) {
         this.pwHash = encoder.encode(password);
     }
@@ -59,4 +62,6 @@ public class User extends AbstractEntity{
     public boolean isMatchingPassword(String password) {
         return encoder.matches(password, pwHash);
     }
+
+
 }

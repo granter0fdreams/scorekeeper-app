@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="https://www.thymeleaf.org/">
 <head th:replace="fragments :: head"></head>
 <body>
-
+<header th:replace="fragments :: header"></header>
 <div class="container body-content">
 
     <h1 th:text="${#strings.capitalizeWords(title)}"></h1>
@@ -38,9 +38,9 @@
         <td>
             <p>
                 Tournament Id:
-                <a th:href="@{'/view/' + ${tournament.id}}" th:text="${tournament.id}"></a>
+                <a th:href="@{'/events/' + ${tournament.id}}" th:text="${tournament.id}"></a>
             </p>
-            <p th:text="${'Name: ' + tournament.name}"></p>
+            <p th:text="${'Name: ' + tournament.eventName}"></p>
 
         </td>
     </tr>

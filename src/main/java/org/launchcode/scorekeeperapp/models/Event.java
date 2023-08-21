@@ -1,29 +1,41 @@
 package org.launchcode.scorekeeperapp.models;
 
-import javax.persistence.Entity;
+import javax.persistence.*;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.Positive;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 public class Event extends AbstractEntity{
 
-    private String name;
+    @ManyToOne
+    private User user;
+
+    @ManyToMany
+    private List<Scores> scores = new ArrayList<>();
+
+    private String eventName;
 
     @Positive
     @Digits(integer = 5, fraction = 0, message = "Please enter an integer larger than 0.")
     private Integer holes;
-
-
-    //@ManyToMany
-    //private final List<User> user = new ArrayList<>();
-
-    public String getName() {
-        return name;
+    public Event(){}
+    public Event(User user, List<Scores> scores, String eventName, Integer holes) {
+        super();
+        this.user = user;
+        this.scores = scores;
+        this.eventName = eventName;
+        this.holes = holes;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public String getEventName() {
+        return eventName;
+    }
+
+    public void setEventName(String eventName) {
+        this.eventName = eventName;
     }
 
     public Integer getHoles() {
@@ -34,9 +46,33 @@ public class Event extends AbstractEntity{
         this.holes = holes;
     }
 
-    public Event(String name, Integer holes, List<User> players) {
-        this.name = name;
-        this.holes = holes;
+
+    public boolean isClosed() {
+        return closed;
     }
-    public Event(){}
+
+    public void setClosed(boolean closed) {
+        this.closed = closed;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public List<Scores> getScores() {
+        return scores;
+    }
+
+    public void setScores(List<Scores> scores) {
+        this.scores = scores;
+    }
+
+    private boolean closed = false;
+
+
 }
+

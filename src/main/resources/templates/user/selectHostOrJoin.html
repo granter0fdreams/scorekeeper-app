@@ -1,20 +1,14 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th = "http://www.thymeleaf.org/">
-<head>
-    <meta charset="UTF-8">
-    <link href="../static/css/styles.css" th:href="@{/css/styles.css}" rel="stylesheet" />
-    <link href="../static/css/select.css" th:href="@{/css/select.css}" rel="stylesheet">
-
+<head th:insert="fragments :: head">
     <title>Dashboard</title>
 </head>
 <body>
-<div>
+<header th:replace="fragments :: header"></header>
 <h1>Welcome to Your Dashboard</h1>
 
-<a href="/events/create"><button>Host A Tournament</button></a>
-<a href="/events/index"><button>Join Existing Tournament</button></a>
-<a href="/user/logout"><button>Log Out</button></a>
-
-</div>
+<a href="/events/create">Host A Tournament</a>
+<a href="/events/index">Join Existing Tournament</a>
+<a href="/user/logout">Log Out</a>
 </body>
 </html>
