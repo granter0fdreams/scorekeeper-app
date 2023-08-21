@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="https://www.thymeleaf.org/">
+<link href="../static/css/search.css" th:href="@{/css/search.css}" rel="stylesheet">
 <head th:replace="fragments :: head"></head>
 <body>
 <header th:replace="fragments :: header"></header>
-<div class="container body-content">
+<div class="container body-content symmetry">
 
     <h1 th:text="${#strings.capitalizeWords(title)}"></h1>
 
@@ -28,7 +29,7 @@
             <input type="text" name="searchTerm" id="searchTerm" />
         </p>
 
-        <input type="submit" value="Search" />
+        <input class="actbut" type="submit" value="Search" />
     </form>
 
     <hr />

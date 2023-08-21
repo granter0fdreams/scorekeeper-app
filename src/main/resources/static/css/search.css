@@ -1,0 +1,41 @@
+.welcome {
+
+height: 900px;
+width: 900px;
+}
+
+body{
+max-width: 100%;
+background-image: url("../images/20170719_055924-1-scaled.jpg");
+background-repeat: no-repeat;
+background-size: cover;
+
+}
+
+button{
+font-weight: bold;
+background-color: lightblue;
+border: .5px solid rgb(255, 233, 171);
+border-radius: 10px;
+margin: 10px;
+
+}
+
+.yellowy-orange {
+font-weight: normal;
+color: #fcf477;
+}
+
+.orangier-yellow {
+font-weight: normal;
+color: #f5bb2a;
+}
+
+.actbut {
+border: 2px solid rgb(154, 214, 212);
+  background-color: rgb(154, 214, 212);
+}
+
+.symmetry {
+text-align: center;
+}
